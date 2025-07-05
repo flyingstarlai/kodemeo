@@ -1,0 +1,167 @@
+{
+  "frames": {
+    "gold_coin_round_blank_1.png": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 45,
+        "h": 46
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 2,
+        "y": 2,
+        "w": 45,
+        "h": 46
+      },
+      "sourceSize": {
+        "w": 50,
+        "h": 50
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "gold_coin_round_blank_2.png": {
+      "frame": {
+        "x": 45,
+        "y": 0,
+        "w": 40,
+        "h": 46
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 5,
+        "y": 2,
+        "w": 40,
+        "h": 46
+      },
+      "sourceSize": {
+        "w": 50,
+        "h": 50
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "gold_coin_round_blank_3.png": {
+      "frame": {
+        "x": 0,
+        "y": 46,
+        "w": 28,
+        "h": 46
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 11,
+        "y": 2,
+        "w": 28,
+        "h": 46
+      },
+      "sourceSize": {
+        "w": 50,
+        "h": 50
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "gold_coin_round_blank_4.png": {
+      "frame": {
+        "x": 0,
+        "y": 74,
+        "w": 14,
+        "h": 46
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 18,
+        "y": 2,
+        "w": 14,
+        "h": 46
+      },
+      "sourceSize": {
+        "w": 50,
+        "h": 50
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "gold_coin_round_blank_5.png": {
+      "frame": {
+        "x": 85,
+        "y": 0,
+        "w": 28,
+        "h": 46
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 11,
+        "y": 2,
+        "w": 28,
+        "h": 46
+      },
+      "sourceSize": {
+        "w": 50,
+        "h": 50
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "gold_coin_round_blank_6.png": {
+      "frame": {
+        "x": 46,
+        "y": 46,
+        "w": 40,
+        "h": 46
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 5,
+        "y": 2,
+        "w": 40,
+        "h": 46
+      },
+      "sourceSize": {
+        "w": 50,
+        "h": 50
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "animations": {
+    "rotate": [
+      "gold_coin_round_blank_1.png",
+      "gold_coin_round_blank_2.png",
+      "gold_coin_round_blank_3.png",
+      "gold_coin_round_blank_4.png",
+      "gold_coin_round_blank_5.png",
+      "gold_coin_round_blank_6.png"
+    ]
+  },
+  "meta": {
+    "image": "collectible_sheet.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 113,
+      "h": 88
+    },
+    "scale": 1
+  }
+}

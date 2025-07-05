@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+    <!-- Cat Head Shape with Solid Green -->
+    <path d="M12 20L20 8L28 20H36L44 8L52 20C52 36 44 52 32 52C20 52 12 36 12 20Z" fill="#00B37E" stroke="#000" stroke-width="2"/>
+
+    <!-- Eyes -->
+    <circle cx="22" cy="28" r="2" fill="#000"/>
+    <circle cx="42" cy="28" r="2" fill="#000"/>
+
+    <!-- Mouth -->
+    <path d="M26 38c2 2 8 2 12 0" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+    <!-- Alternative symbol { } -->
+</svg>
