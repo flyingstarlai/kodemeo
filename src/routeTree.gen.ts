@@ -14,12 +14,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as TeacherRouteImport } from './routes/_teacher'
 import { Route as StudentRouteImport } from './routes/_student'
+import { Route as PlaygroundRouteImport } from './routes/_playground'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeacherEnrollmentsRouteImport } from './routes/_teacher/enrollments'
 import { Route as TeacherDashboardRouteImport } from './routes/_teacher/dashboard'
 import { Route as TeacherAccountRouteImport } from './routes/_teacher/account'
 import { Route as StudentStudentRouteImport } from './routes/_student/student'
+import { Route as PlaygroundPlaygroundRouteImport } from './routes/_playground/playground'
 import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as TeacherAssignmentsIndexRouteImport } from './routes/_teacher/assignments/index'
@@ -43,6 +45,10 @@ const TeacherRoute = TeacherRouteImport.update({
 } as any)
 const StudentRoute = StudentRouteImport.update({
   id: '/_student',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlaygroundRoute = PlaygroundRouteImport.update({
+  id: '/_playground',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -78,6 +84,11 @@ const StudentStudentRoute = StudentStudentRouteImport.update({
   id: '/student',
   path: '/student',
   getParentRoute: () => StudentRoute,
+} as any)
+const PlaygroundPlaygroundRoute = PlaygroundPlaygroundRouteImport.update({
+  id: '/playground',
+  path: '/playground',
+  getParentRoute: () => PlaygroundRoute,
 } as any)
 const AuthRegisterRoute = AuthRegisterRouteImport.update({
   id: '/register',
@@ -132,6 +143,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/playground': typeof PlaygroundPlaygroundRoute
   '/student': typeof StudentStudentRoute
   '/account': typeof TeacherAccountRoute
   '/dashboard': typeof TeacherDashboardRoute
@@ -149,6 +161,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/playground': typeof PlaygroundPlaygroundRoute
   '/student': typeof StudentStudentRoute
   '/account': typeof TeacherAccountRoute
   '/dashboard': typeof TeacherDashboardRoute
@@ -164,11 +177,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
+  '/_playground': typeof PlaygroundRouteWithChildren
   '/_student': typeof StudentRouteWithChildren
   '/_teacher': typeof TeacherRouteWithChildren
   '/about': typeof AboutRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
+  '/_playground/playground': typeof PlaygroundPlaygroundRoute
   '/_student/student': typeof StudentStudentRoute
   '/_teacher/account': typeof TeacherAccountRoute
   '/_teacher/dashboard': typeof TeacherDashboardRoute
@@ -189,6 +204,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/register'
+    | '/playground'
     | '/student'
     | '/account'
     | '/dashboard'
@@ -206,6 +222,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/login'
     | '/register'
+    | '/playground'
     | '/student'
     | '/account'
     | '/dashboard'
@@ -220,11 +237,13 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_auth'
+    | '/_playground'
     | '/_student'
     | '/_teacher'
     | '/about'
     | '/_auth/login'
     | '/_auth/register'
+    | '/_playground/playground'
     | '/_student/student'
     | '/_teacher/account'
     | '/_teacher/dashboard'
@@ -242,6 +261,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
+  PlaygroundRoute: typeof PlaygroundRouteWithChildren
   StudentRoute: typeof StudentRouteWithChildren
   TeacherRoute: typeof TeacherRouteWithChildren
   AboutRoute: typeof AboutRoute
@@ -268,6 +288,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof StudentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_playground': {
+      id: '/_playground'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof PlaygroundRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth': {
@@ -318,6 +345,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/student'
       preLoaderRoute: typeof StudentStudentRouteImport
       parentRoute: typeof StudentRoute
+    }
+    '/_playground/playground': {
+      id: '/_playground/playground'
+      path: '/playground'
+      fullPath: '/playground'
+      preLoaderRoute: typeof PlaygroundPlaygroundRouteImport
+      parentRoute: typeof PlaygroundRoute
     }
     '/_auth/register': {
       id: '/_auth/register'
@@ -399,6 +433,18 @@ const AuthRouteChildren: AuthRouteChildren = {
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
+interface PlaygroundRouteChildren {
+  PlaygroundPlaygroundRoute: typeof PlaygroundPlaygroundRoute
+}
+
+const PlaygroundRouteChildren: PlaygroundRouteChildren = {
+  PlaygroundPlaygroundRoute: PlaygroundPlaygroundRoute,
+}
+
+const PlaygroundRouteWithChildren = PlaygroundRoute._addFileChildren(
+  PlaygroundRouteChildren,
+)
+
 interface StudentCoursesGameRouteChildren {
   StudentCoursesGameCoursePlayRoute: typeof StudentCoursesGameCoursePlayRoute
   StudentCoursesGameCourseIndexRoute: typeof StudentCoursesGameCourseIndexRoute
@@ -461,6 +507,7 @@ const TeacherRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
+  PlaygroundRoute: PlaygroundRouteWithChildren,
   StudentRoute: StudentRouteWithChildren,
   TeacherRoute: TeacherRouteWithChildren,
   AboutRoute: AboutRoute,
