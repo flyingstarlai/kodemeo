@@ -30,7 +30,7 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course }) => {
           await navigate({
             to: "/courses/$course",
             params: { course: course.slug },
-            search: { week: 1 },
+            search: { page: 1 },
           });
         },
       },
@@ -42,7 +42,7 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course }) => {
       await navigate({
         to: "/courses/$course",
         params: { course: course.slug },
-        search: { week: 1 },
+        search: { page: 1 },
       });
     } else {
       setConfirmOpen(true);

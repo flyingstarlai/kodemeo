@@ -79,7 +79,9 @@ export function stopSound(key: SoundKey) {
 
 export function fadeOutSound(key: SoundKey, duration = 1000) {
   const s = sounds[key];
-  if (s) s.fade(s.volume(), 0, duration);
+  if (!s || !s.playing()) return;
+
+  s.fade(s.volume(), 0, duration);
 }
 
 export function isSoundPlaying(key: SoundKey) {

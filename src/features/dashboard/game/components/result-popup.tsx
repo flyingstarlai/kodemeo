@@ -76,12 +76,12 @@ export const ResultPopup = () => {
 
     closeDialog();
 
-    const challengePerWeek = 5;
-    const week = Math.ceil(currentChallenge.level / challengePerWeek);
+    const challengePerPage = 6;
+    const page = Math.ceil(currentChallenge.level / challengePerPage);
     await navigate({
       to: "/courses/$course",
       params: { course: courseSlug },
-      search: { week },
+      search: { page },
     });
   };
 

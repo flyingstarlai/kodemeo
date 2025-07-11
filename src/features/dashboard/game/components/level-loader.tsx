@@ -19,11 +19,8 @@ export const LevelLoader: React.FC = () => {
   useEffect(() => {
     if (!challenge) return;
 
-    if (
-      prevChallengeId.current &&
-      challenge.challengeId !== prevChallengeId.current
-    ) {
-      console.log("Level changed: triggering cleanup");
+    if (prevChallengeId.current !== challenge.challengeId) {
+      console.log("CLEANUP");
       triggerCleanup(true);
     }
 
@@ -51,8 +48,6 @@ export const LevelLoader: React.FC = () => {
     // if valid: load level
     setCurrentLevel(challenge.levelData);
     setMaxCoins(challenge.levelData.collectible.length);
-
-    prevChallengeId.current = challenge.challengeId;
   }, [
     challenge,
     id,

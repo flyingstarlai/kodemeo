@@ -29,8 +29,8 @@ export const HoverableFlag: React.FC<HoverFlagProps> = ({
 }) => {
   const containerRef = useRef<Container>(null);
   const offset = {
-    x: 71 / 2,
-    y: 128 / 2,
+    x: 55 / 2,
+    y: 100 / 2,
   };
 
   const [targetScale] = useState({ hover: 1.1, normal: 1 });
@@ -53,10 +53,10 @@ export const HoverableFlag: React.FC<HoverFlagProps> = ({
 
   const textStyle = new TextStyle({
     fill: "#fffefe",
-    fontSize: 18,
-    fontWeight: "500",
+    fontSize: 16,
+    fontWeight: "400",
     fontFamily: "Fredoka One",
-    stroke: { color: "#4a1850", width: 4, join: "round" },
+    stroke: { color: "#4a1850", width: 2, join: "round" },
   });
 
   return (
@@ -82,14 +82,14 @@ export const HoverableFlag: React.FC<HoverFlagProps> = ({
       y={y - offset.y}
     >
       <pixiSprite texture={texture} roundPixels={true} anchor={0.5} />
-      <pixiText text={label} style={textStyle} anchor={0.5} y={-4} />
+      <pixiText text={label} style={textStyle} anchor={0.5} y={-2} />
       {starTex && (
         <pixiSprite
           texture={starTex}
           roundPixels={true}
           anchor={0.5}
           scale={0.8}
-          y={-offset.y - 7}
+          y={-offset.y - 8}
         />
       )}
     </pixiContainer>

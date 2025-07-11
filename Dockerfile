@@ -1,5 +1,6 @@
 # Base image with Bun
 FROM oven/bun:1.2 AS builder
+ENV NODE_ENV=production
 
 # Set workdir
 WORKDIR /app
@@ -14,6 +15,7 @@ RUN bun install --frozen-lockfile && \
 
 # Use nginx to serve the static files
 FROM nginx:alpine
+ENV NODE_ENV=production
 
 # Copy build result from Bun
 COPY --from=builder /app/dist /usr/share/nginx/html

@@ -88,7 +88,7 @@ export function SiteHeader() {
         </Breadcrumb>
 
         <div className="ml-auto flex items-center gap-2">
-          <SoundToggle />
+          {location.pathname.includes("playground") && <SoundToggle />}
           <ModeToggle />
         </div>
       </div>

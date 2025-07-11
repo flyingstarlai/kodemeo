@@ -10,16 +10,18 @@ import { useMemo } from "react";
 export const BackgroundMapSprite: React.FC = () => {
   const { sequence } = useAssets();
   const rawMap = sequence.mapSeq as unknown as TiledMap;
-  const { week } = useSearch({ strict: false });
+  const { page } = useSearch({ strict: false });
   const sheetTex = sequence.autumnMap;
 
   const frames = useMemo(() => {
     return sliceSpritesheet(sheetTex, rawMap.tilesets[0]);
   }, [sheetTex, rawMap.tilesets]);
 
-  if (!week) return null;
+  if (!page) return null;
 
-  const path = [1, 2, 3].includes(week) ? `path_${week}` : "path_1";
+  const path = [1, 2, 3, 4, 5, 6, 7, 8].includes(page)
+    ? `path_${page}`
+    : "path_1";
 
   return (
     <>

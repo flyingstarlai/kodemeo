@@ -1,19 +1,28 @@
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { playSound, isSoundPlaying, stopSound } from "@/lib/sounds";
+import { isSoundPlaying, playSound, stopSound } from "@/lib/sounds";
+import { useSoundStore } from "@/stores/use-sound-store";
 import { IconVolumeOff, IconVolume } from "@tabler/icons-react";
+import { useEffect } from "react";
 
 export const SoundToggle: React.FC = () => {
-  const [muted, setMuted] = useState(!isSoundPlaying("bgMusic"));
+  const muted = useSoundStore((s) => s.muted);
+  const setMuted = useSoundStore((s) => s.setMuted);
 
   const toggleMute = () => {
-    if (muted) {
-      playSound("bgMusic", { loop: true, volume: 0.5 });
-    } else {
+    const newMuted = !muted;
+    setMuted(newMuted);
+    if (newMuted) {
       stopSound("bgMusic");
+    } else {
+      playSound("bgMusic", { loop: true, volume: 0.5 });
     }
-    setMuted((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (!muted && !isSoundPlaying("bgMusic")) {
+      playSound("bgMusic", { loop: true, volume: 0.5 });
+    }
+  }, [muted]);
 
   return (
     <Button variant="outline" size="icon" onClick={toggleMute}>

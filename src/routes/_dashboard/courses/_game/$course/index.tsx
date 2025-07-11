@@ -2,15 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { MapCanvas } from "@/features/dashboard/challenge/components/map-canvas.tsx";
 
 type PageLoad = {
-  week: number;
+  page: number;
 };
 
 export const Route = createFileRoute("/_dashboard/courses/_game/$course/")({
   component: RouteComponent,
   validateSearch: (search: Record<string, unknown>): PageLoad => {
-    const raw = search.week as number | undefined;
+    const raw = search.page as number | undefined;
     return {
-      week: raw ? raw : 1,
+      page: raw ? raw : 1,
     };
   },
 });

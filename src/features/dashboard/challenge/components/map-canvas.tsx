@@ -10,10 +10,12 @@ import { ChallengeFlagsSprite } from "@/features/dashboard/challenge/renders/cha
 
 const screenColor = 0xc9d308;
 
+const animals = ["🐱", "🐶", "🐰", "🐼", "🐸", "🦊", "🐵", "🐯"];
+
 export const MapCanvas: React.FC = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const { course: courseSlug } = useParams({ strict: false });
-  const { week } = useSearch({ strict: false }) as { week: number };
+  const { page } = useSearch({ strict: false }) as { page: number };
   extend({
     Container,
     Sprite,
@@ -29,13 +31,13 @@ export const MapCanvas: React.FC = () => {
       className="relative   flex-1 min-h-0 overflow-hidden lg:rounded-lg lg:shadow-xs"
     >
       <div className="absolute top-2 left-1/2 z-10 flex -translate-x-1/2 space-x-2">
-        {[1, 2, 3, 4].map((n) => (
-          <Link key={n} to="." search={() => ({ week: n })} replace>
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+          <Link key={n} to="." search={() => ({ page: n })} replace>
             <Button
-              className="opacity-70"
-              variant={week === n ? "default" : "outline"}
+              className="opacity-70 cursor-pointer p-4 text-2xl"
+              variant={page === n ? "default" : "outline"}
             >
-              {n}
+              {animals[n - 1]}
             </Button>
           </Link>
         ))}

@@ -10,7 +10,7 @@ import { playSound } from "@/lib/sounds.ts";
 export const ChallengeFlagsSprite: React.FC = () => {
   const { sequence, stars: starTexs } = useAssets();
   const { course: courseSlug } = useParams({ strict: false });
-  const { week } = useSearch({ strict: false });
+  const { page } = useSearch({ strict: false });
 
   const rawMap = sequence.mapSeq as unknown as TiledMap;
   const flagTex = sequence.mapFlag;
@@ -24,8 +24,8 @@ export const ChallengeFlagsSprite: React.FC = () => {
     return;
   }
 
-  const markerKey = [1, 2, 3, 4].includes(week ?? 1)
-    ? `marker_${week}`
+  const markerKey = [1, 2, 3, 4, 5, 6, 7, 8].includes(page ?? 1)
+    ? `marker_${page}`
     : "marker_1";
   const markerLayer = rawMap.layers.find(
     (l) => l.type === "objectgroup" && l.name === markerKey,
