@@ -1,5 +1,30 @@
 import { Texture, Rectangle } from "pixi.js";
-import type { TiledMap } from "@/features/student/game/types.ts";
+
+export interface TiledMap {
+  width: number;
+  height: number;
+  tilewidth: number;
+  tileheight: number;
+  layers: Array<{
+    name: string;
+    type: string;
+    visible: boolean;
+    data: number[];
+    objects: Array<{
+      name: string;
+      id: number;
+      x: number;
+      y: number;
+    }>;
+  }>;
+  tilesets: Array<{
+    firstgid: number;
+    columns: number;
+    tilecount: number;
+    tilewidth: number;
+    tileheight: number;
+  }>;
+}
 
 export interface TilesetInfo {
   firstgid: number;

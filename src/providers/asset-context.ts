@@ -11,7 +11,6 @@ export interface AssetContextType {
   chest: BundleTextures<"chest">;
   stars: BundleTextures<"stars">;
   // audio URLs
-  audio: BundleTextures<"audio">;
   sequence: BundleTextures<"sequence">;
 }
 

@@ -3,7 +3,6 @@ import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
 
 let _authApi: AxiosInstance | null = null;
-let _teacherApi: AxiosInstance | null = null;
 let _studentApi: AxiosInstance | null = null;
 
 export function getBaseApiClient(): AxiosInstance {
@@ -27,20 +26,7 @@ export function getAuthApiClient(): AxiosInstance {
 }
 
 /**
- * API client for teacher endpoints (/api/teacher)
- */
-export function getTeacherApiClient(): AxiosInstance {
-  if (!_teacherApi) {
-    _teacherApi = axios.create({
-      baseURL: `${API_URL}/api/teacher`,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-  return _teacherApi;
-}
-
-/**
- * API client for student endpoints (/api/student)
+ * API client for dashboard endpoints (/api/dashboard)
  */
 export function getStudentApiClient(): AxiosInstance {
   if (!_studentApi) {

@@ -11,44 +11,21 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as TeacherRouteImport } from './routes/_teacher'
-import { Route as StudentRouteImport } from './routes/_student'
-import { Route as PlaygroundRouteImport } from './routes/_playground'
+import { Route as DashboardRouteImport } from './routes/_dashboard'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as TeacherEnrollmentsRouteImport } from './routes/_teacher/enrollments'
-import { Route as TeacherDashboardRouteImport } from './routes/_teacher/dashboard'
-import { Route as TeacherAccountRouteImport } from './routes/_teacher/account'
-import { Route as StudentStudentRouteImport } from './routes/_student/student'
-import { Route as PlaygroundPlaygroundRouteImport } from './routes/_playground/playground'
-import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
+import { Route as DashboardDashboardRouteImport } from './routes/_dashboard/dashboard'
+import { Route as DashboardAccountRouteImport } from './routes/_dashboard/account'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
-import { Route as TeacherAssignmentsIndexRouteImport } from './routes/_teacher/assignments/index'
-import { Route as StudentCoursesIndexRouteImport } from './routes/_student/courses/index'
-import { Route as TeacherAssignmentsCourseRouteImport } from './routes/_teacher/assignments/$course'
-import { Route as StudentCoursesGameRouteImport } from './routes/_student/courses/_game'
-import { Route as AuthStudentLoginRouteImport } from './routes/_auth/student.login'
-import { Route as StudentCoursesGameCourseIndexRouteImport } from './routes/_student/courses/_game/$course/index'
-import { Route as StudentCoursesGameCoursePlayRouteImport } from './routes/_student/courses/_game/$course/play'
+import { Route as DashboardCoursesIndexRouteImport } from './routes/_dashboard/courses/index'
+import { Route as DashboardCoursesGameRouteImport } from './routes/_dashboard/courses/_game'
+import { Route as DashboardCoursesGameCourseIndexRouteImport } from './routes/_dashboard/courses/_game/$course/index'
+import { Route as DashboardCoursesGameCoursePlaygroundRouteImport } from './routes/_dashboard/courses/_game/$course/playground'
 
-const StudentCoursesRouteImport = createFileRoute('/_student/courses')()
+const DashboardCoursesRouteImport = createFileRoute('/_dashboard/courses')()
 
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TeacherRoute = TeacherRouteImport.update({
-  id: '/_teacher',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StudentRoute = StudentRouteImport.update({
-  id: '/_student',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlaygroundRoute = PlaygroundRouteImport.update({
-  id: '/_playground',
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/_dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -60,241 +37,129 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StudentCoursesRoute = StudentCoursesRouteImport.update({
+const DashboardCoursesRoute = DashboardCoursesRouteImport.update({
   id: '/courses',
   path: '/courses',
-  getParentRoute: () => StudentRoute,
+  getParentRoute: () => DashboardRoute,
 } as any)
-const TeacherEnrollmentsRoute = TeacherEnrollmentsRouteImport.update({
-  id: '/enrollments',
-  path: '/enrollments',
-  getParentRoute: () => TeacherRoute,
-} as any)
-const TeacherDashboardRoute = TeacherDashboardRouteImport.update({
+const DashboardDashboardRoute = DashboardDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => TeacherRoute,
+  getParentRoute: () => DashboardRoute,
 } as any)
-const TeacherAccountRoute = TeacherAccountRouteImport.update({
+const DashboardAccountRoute = DashboardAccountRouteImport.update({
   id: '/account',
   path: '/account',
-  getParentRoute: () => TeacherRoute,
-} as any)
-const StudentStudentRoute = StudentStudentRouteImport.update({
-  id: '/student',
-  path: '/student',
-  getParentRoute: () => StudentRoute,
-} as any)
-const PlaygroundPlaygroundRoute = PlaygroundPlaygroundRouteImport.update({
-  id: '/playground',
-  path: '/playground',
-  getParentRoute: () => PlaygroundRoute,
-} as any)
-const AuthRegisterRoute = AuthRegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
-  getParentRoute: () => AuthRoute,
+  getParentRoute: () => DashboardRoute,
 } as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => AuthRoute,
 } as any)
-const TeacherAssignmentsIndexRoute = TeacherAssignmentsIndexRouteImport.update({
-  id: '/assignments/',
-  path: '/assignments/',
-  getParentRoute: () => TeacherRoute,
-} as any)
-const StudentCoursesIndexRoute = StudentCoursesIndexRouteImport.update({
+const DashboardCoursesIndexRoute = DashboardCoursesIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => StudentCoursesRoute,
+  getParentRoute: () => DashboardCoursesRoute,
 } as any)
-const TeacherAssignmentsCourseRoute =
-  TeacherAssignmentsCourseRouteImport.update({
-    id: '/assignments/$course',
-    path: '/assignments/$course',
-    getParentRoute: () => TeacherRoute,
-  } as any)
-const StudentCoursesGameRoute = StudentCoursesGameRouteImport.update({
+const DashboardCoursesGameRoute = DashboardCoursesGameRouteImport.update({
   id: '/_game',
-  getParentRoute: () => StudentCoursesRoute,
+  getParentRoute: () => DashboardCoursesRoute,
 } as any)
-const AuthStudentLoginRoute = AuthStudentLoginRouteImport.update({
-  id: '/student/login',
-  path: '/student/login',
-  getParentRoute: () => AuthRoute,
-} as any)
-const StudentCoursesGameCourseIndexRoute =
-  StudentCoursesGameCourseIndexRouteImport.update({
+const DashboardCoursesGameCourseIndexRoute =
+  DashboardCoursesGameCourseIndexRouteImport.update({
     id: '/$course/',
     path: '/$course/',
-    getParentRoute: () => StudentCoursesGameRoute,
+    getParentRoute: () => DashboardCoursesGameRoute,
   } as any)
-const StudentCoursesGameCoursePlayRoute =
-  StudentCoursesGameCoursePlayRouteImport.update({
-    id: '/$course/play',
-    path: '/$course/play',
-    getParentRoute: () => StudentCoursesGameRoute,
+const DashboardCoursesGameCoursePlaygroundRoute =
+  DashboardCoursesGameCoursePlaygroundRouteImport.update({
+    id: '/$course/playground',
+    path: '/$course/playground',
+    getParentRoute: () => DashboardCoursesGameRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/login': typeof AuthLoginRoute
-  '/register': typeof AuthRegisterRoute
-  '/playground': typeof PlaygroundPlaygroundRoute
-  '/student': typeof StudentStudentRoute
-  '/account': typeof TeacherAccountRoute
-  '/dashboard': typeof TeacherDashboardRoute
-  '/enrollments': typeof TeacherEnrollmentsRoute
-  '/student/login': typeof AuthStudentLoginRoute
-  '/courses': typeof StudentCoursesGameRouteWithChildren
-  '/assignments/$course': typeof TeacherAssignmentsCourseRoute
-  '/courses/': typeof StudentCoursesIndexRoute
-  '/assignments': typeof TeacherAssignmentsIndexRoute
-  '/courses/$course/play': typeof StudentCoursesGameCoursePlayRoute
-  '/courses/$course': typeof StudentCoursesGameCourseIndexRoute
+  '/account': typeof DashboardAccountRoute
+  '/dashboard': typeof DashboardDashboardRoute
+  '/courses': typeof DashboardCoursesGameRouteWithChildren
+  '/courses/': typeof DashboardCoursesIndexRoute
+  '/courses/$course/playground': typeof DashboardCoursesGameCoursePlaygroundRoute
+  '/courses/$course': typeof DashboardCoursesGameCourseIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/login': typeof AuthLoginRoute
-  '/register': typeof AuthRegisterRoute
-  '/playground': typeof PlaygroundPlaygroundRoute
-  '/student': typeof StudentStudentRoute
-  '/account': typeof TeacherAccountRoute
-  '/dashboard': typeof TeacherDashboardRoute
-  '/enrollments': typeof TeacherEnrollmentsRoute
-  '/student/login': typeof AuthStudentLoginRoute
-  '/courses': typeof StudentCoursesIndexRoute
-  '/assignments/$course': typeof TeacherAssignmentsCourseRoute
-  '/assignments': typeof TeacherAssignmentsIndexRoute
-  '/courses/$course/play': typeof StudentCoursesGameCoursePlayRoute
-  '/courses/$course': typeof StudentCoursesGameCourseIndexRoute
+  '/account': typeof DashboardAccountRoute
+  '/dashboard': typeof DashboardDashboardRoute
+  '/courses': typeof DashboardCoursesIndexRoute
+  '/courses/$course/playground': typeof DashboardCoursesGameCoursePlaygroundRoute
+  '/courses/$course': typeof DashboardCoursesGameCourseIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
-  '/_playground': typeof PlaygroundRouteWithChildren
-  '/_student': typeof StudentRouteWithChildren
-  '/_teacher': typeof TeacherRouteWithChildren
-  '/about': typeof AboutRoute
+  '/_dashboard': typeof DashboardRouteWithChildren
   '/_auth/login': typeof AuthLoginRoute
-  '/_auth/register': typeof AuthRegisterRoute
-  '/_playground/playground': typeof PlaygroundPlaygroundRoute
-  '/_student/student': typeof StudentStudentRoute
-  '/_teacher/account': typeof TeacherAccountRoute
-  '/_teacher/dashboard': typeof TeacherDashboardRoute
-  '/_teacher/enrollments': typeof TeacherEnrollmentsRoute
-  '/_auth/student/login': typeof AuthStudentLoginRoute
-  '/_student/courses': typeof StudentCoursesRouteWithChildren
-  '/_student/courses/_game': typeof StudentCoursesGameRouteWithChildren
-  '/_teacher/assignments/$course': typeof TeacherAssignmentsCourseRoute
-  '/_student/courses/': typeof StudentCoursesIndexRoute
-  '/_teacher/assignments/': typeof TeacherAssignmentsIndexRoute
-  '/_student/courses/_game/$course/play': typeof StudentCoursesGameCoursePlayRoute
-  '/_student/courses/_game/$course/': typeof StudentCoursesGameCourseIndexRoute
+  '/_dashboard/account': typeof DashboardAccountRoute
+  '/_dashboard/dashboard': typeof DashboardDashboardRoute
+  '/_dashboard/courses': typeof DashboardCoursesRouteWithChildren
+  '/_dashboard/courses/_game': typeof DashboardCoursesGameRouteWithChildren
+  '/_dashboard/courses/': typeof DashboardCoursesIndexRoute
+  '/_dashboard/courses/_game/$course/playground': typeof DashboardCoursesGameCoursePlaygroundRoute
+  '/_dashboard/courses/_game/$course/': typeof DashboardCoursesGameCourseIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about'
     | '/login'
-    | '/register'
-    | '/playground'
-    | '/student'
     | '/account'
     | '/dashboard'
-    | '/enrollments'
-    | '/student/login'
     | '/courses'
-    | '/assignments/$course'
     | '/courses/'
-    | '/assignments'
-    | '/courses/$course/play'
+    | '/courses/$course/playground'
     | '/courses/$course'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/about'
     | '/login'
-    | '/register'
-    | '/playground'
-    | '/student'
     | '/account'
     | '/dashboard'
-    | '/enrollments'
-    | '/student/login'
     | '/courses'
-    | '/assignments/$course'
-    | '/assignments'
-    | '/courses/$course/play'
+    | '/courses/$course/playground'
     | '/courses/$course'
   id:
     | '__root__'
     | '/'
     | '/_auth'
-    | '/_playground'
-    | '/_student'
-    | '/_teacher'
-    | '/about'
+    | '/_dashboard'
     | '/_auth/login'
-    | '/_auth/register'
-    | '/_playground/playground'
-    | '/_student/student'
-    | '/_teacher/account'
-    | '/_teacher/dashboard'
-    | '/_teacher/enrollments'
-    | '/_auth/student/login'
-    | '/_student/courses'
-    | '/_student/courses/_game'
-    | '/_teacher/assignments/$course'
-    | '/_student/courses/'
-    | '/_teacher/assignments/'
-    | '/_student/courses/_game/$course/play'
-    | '/_student/courses/_game/$course/'
+    | '/_dashboard/account'
+    | '/_dashboard/dashboard'
+    | '/_dashboard/courses'
+    | '/_dashboard/courses/_game'
+    | '/_dashboard/courses/'
+    | '/_dashboard/courses/_game/$course/playground'
+    | '/_dashboard/courses/_game/$course/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
-  PlaygroundRoute: typeof PlaygroundRouteWithChildren
-  StudentRoute: typeof StudentRouteWithChildren
-  TeacherRoute: typeof TeacherRouteWithChildren
-  AboutRoute: typeof AboutRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_teacher': {
-      id: '/_teacher'
+    '/_dashboard': {
+      id: '/_dashboard'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof TeacherRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_student': {
-      id: '/_student'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof StudentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_playground': {
-      id: '/_playground'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof PlaygroundRouteImport
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth': {
@@ -311,54 +176,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_student/courses': {
-      id: '/_student/courses'
+    '/_dashboard/courses': {
+      id: '/_dashboard/courses'
       path: '/courses'
       fullPath: '/courses'
-      preLoaderRoute: typeof StudentCoursesRouteImport
-      parentRoute: typeof StudentRoute
+      preLoaderRoute: typeof DashboardCoursesRouteImport
+      parentRoute: typeof DashboardRoute
     }
-    '/_teacher/enrollments': {
-      id: '/_teacher/enrollments'
-      path: '/enrollments'
-      fullPath: '/enrollments'
-      preLoaderRoute: typeof TeacherEnrollmentsRouteImport
-      parentRoute: typeof TeacherRoute
-    }
-    '/_teacher/dashboard': {
-      id: '/_teacher/dashboard'
+    '/_dashboard/dashboard': {
+      id: '/_dashboard/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
-      preLoaderRoute: typeof TeacherDashboardRouteImport
-      parentRoute: typeof TeacherRoute
+      preLoaderRoute: typeof DashboardDashboardRouteImport
+      parentRoute: typeof DashboardRoute
     }
-    '/_teacher/account': {
-      id: '/_teacher/account'
+    '/_dashboard/account': {
+      id: '/_dashboard/account'
       path: '/account'
       fullPath: '/account'
-      preLoaderRoute: typeof TeacherAccountRouteImport
-      parentRoute: typeof TeacherRoute
-    }
-    '/_student/student': {
-      id: '/_student/student'
-      path: '/student'
-      fullPath: '/student'
-      preLoaderRoute: typeof StudentStudentRouteImport
-      parentRoute: typeof StudentRoute
-    }
-    '/_playground/playground': {
-      id: '/_playground/playground'
-      path: '/playground'
-      fullPath: '/playground'
-      preLoaderRoute: typeof PlaygroundPlaygroundRouteImport
-      parentRoute: typeof PlaygroundRoute
-    }
-    '/_auth/register': {
-      id: '/_auth/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof AuthRegisterRouteImport
-      parentRoute: typeof AuthRoute
+      preLoaderRoute: typeof DashboardAccountRouteImport
+      parentRoute: typeof DashboardRoute
     }
     '/_auth/login': {
       id: '/_auth/login'
@@ -367,150 +204,94 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRoute
     }
-    '/_teacher/assignments/': {
-      id: '/_teacher/assignments/'
-      path: '/assignments'
-      fullPath: '/assignments'
-      preLoaderRoute: typeof TeacherAssignmentsIndexRouteImport
-      parentRoute: typeof TeacherRoute
-    }
-    '/_student/courses/': {
-      id: '/_student/courses/'
+    '/_dashboard/courses/': {
+      id: '/_dashboard/courses/'
       path: '/'
       fullPath: '/courses/'
-      preLoaderRoute: typeof StudentCoursesIndexRouteImport
-      parentRoute: typeof StudentCoursesRoute
+      preLoaderRoute: typeof DashboardCoursesIndexRouteImport
+      parentRoute: typeof DashboardCoursesRoute
     }
-    '/_teacher/assignments/$course': {
-      id: '/_teacher/assignments/$course'
-      path: '/assignments/$course'
-      fullPath: '/assignments/$course'
-      preLoaderRoute: typeof TeacherAssignmentsCourseRouteImport
-      parentRoute: typeof TeacherRoute
-    }
-    '/_student/courses/_game': {
-      id: '/_student/courses/_game'
+    '/_dashboard/courses/_game': {
+      id: '/_dashboard/courses/_game'
       path: '/courses'
       fullPath: '/courses'
-      preLoaderRoute: typeof StudentCoursesGameRouteImport
-      parentRoute: typeof StudentCoursesRoute
+      preLoaderRoute: typeof DashboardCoursesGameRouteImport
+      parentRoute: typeof DashboardCoursesRoute
     }
-    '/_auth/student/login': {
-      id: '/_auth/student/login'
-      path: '/student/login'
-      fullPath: '/student/login'
-      preLoaderRoute: typeof AuthStudentLoginRouteImport
-      parentRoute: typeof AuthRoute
-    }
-    '/_student/courses/_game/$course/': {
-      id: '/_student/courses/_game/$course/'
+    '/_dashboard/courses/_game/$course/': {
+      id: '/_dashboard/courses/_game/$course/'
       path: '/$course'
       fullPath: '/courses/$course'
-      preLoaderRoute: typeof StudentCoursesGameCourseIndexRouteImport
-      parentRoute: typeof StudentCoursesGameRoute
+      preLoaderRoute: typeof DashboardCoursesGameCourseIndexRouteImport
+      parentRoute: typeof DashboardCoursesGameRoute
     }
-    '/_student/courses/_game/$course/play': {
-      id: '/_student/courses/_game/$course/play'
-      path: '/$course/play'
-      fullPath: '/courses/$course/play'
-      preLoaderRoute: typeof StudentCoursesGameCoursePlayRouteImport
-      parentRoute: typeof StudentCoursesGameRoute
+    '/_dashboard/courses/_game/$course/playground': {
+      id: '/_dashboard/courses/_game/$course/playground'
+      path: '/$course/playground'
+      fullPath: '/courses/$course/playground'
+      preLoaderRoute: typeof DashboardCoursesGameCoursePlaygroundRouteImport
+      parentRoute: typeof DashboardCoursesGameRoute
     }
   }
 }
 
 interface AuthRouteChildren {
   AuthLoginRoute: typeof AuthLoginRoute
-  AuthRegisterRoute: typeof AuthRegisterRoute
-  AuthStudentLoginRoute: typeof AuthStudentLoginRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthLoginRoute: AuthLoginRoute,
-  AuthRegisterRoute: AuthRegisterRoute,
-  AuthStudentLoginRoute: AuthStudentLoginRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
-interface PlaygroundRouteChildren {
-  PlaygroundPlaygroundRoute: typeof PlaygroundPlaygroundRoute
+interface DashboardCoursesGameRouteChildren {
+  DashboardCoursesGameCoursePlaygroundRoute: typeof DashboardCoursesGameCoursePlaygroundRoute
+  DashboardCoursesGameCourseIndexRoute: typeof DashboardCoursesGameCourseIndexRoute
 }
 
-const PlaygroundRouteChildren: PlaygroundRouteChildren = {
-  PlaygroundPlaygroundRoute: PlaygroundPlaygroundRoute,
+const DashboardCoursesGameRouteChildren: DashboardCoursesGameRouteChildren = {
+  DashboardCoursesGameCoursePlaygroundRoute:
+    DashboardCoursesGameCoursePlaygroundRoute,
+  DashboardCoursesGameCourseIndexRoute: DashboardCoursesGameCourseIndexRoute,
 }
 
-const PlaygroundRouteWithChildren = PlaygroundRoute._addFileChildren(
-  PlaygroundRouteChildren,
+const DashboardCoursesGameRouteWithChildren =
+  DashboardCoursesGameRoute._addFileChildren(DashboardCoursesGameRouteChildren)
+
+interface DashboardCoursesRouteChildren {
+  DashboardCoursesGameRoute: typeof DashboardCoursesGameRouteWithChildren
+  DashboardCoursesIndexRoute: typeof DashboardCoursesIndexRoute
+}
+
+const DashboardCoursesRouteChildren: DashboardCoursesRouteChildren = {
+  DashboardCoursesGameRoute: DashboardCoursesGameRouteWithChildren,
+  DashboardCoursesIndexRoute: DashboardCoursesIndexRoute,
+}
+
+const DashboardCoursesRouteWithChildren =
+  DashboardCoursesRoute._addFileChildren(DashboardCoursesRouteChildren)
+
+interface DashboardRouteChildren {
+  DashboardAccountRoute: typeof DashboardAccountRoute
+  DashboardDashboardRoute: typeof DashboardDashboardRoute
+  DashboardCoursesRoute: typeof DashboardCoursesRouteWithChildren
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAccountRoute: DashboardAccountRoute,
+  DashboardDashboardRoute: DashboardDashboardRoute,
+  DashboardCoursesRoute: DashboardCoursesRouteWithChildren,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
 )
-
-interface StudentCoursesGameRouteChildren {
-  StudentCoursesGameCoursePlayRoute: typeof StudentCoursesGameCoursePlayRoute
-  StudentCoursesGameCourseIndexRoute: typeof StudentCoursesGameCourseIndexRoute
-}
-
-const StudentCoursesGameRouteChildren: StudentCoursesGameRouteChildren = {
-  StudentCoursesGameCoursePlayRoute: StudentCoursesGameCoursePlayRoute,
-  StudentCoursesGameCourseIndexRoute: StudentCoursesGameCourseIndexRoute,
-}
-
-const StudentCoursesGameRouteWithChildren =
-  StudentCoursesGameRoute._addFileChildren(StudentCoursesGameRouteChildren)
-
-interface StudentCoursesRouteChildren {
-  StudentCoursesGameRoute: typeof StudentCoursesGameRouteWithChildren
-  StudentCoursesIndexRoute: typeof StudentCoursesIndexRoute
-}
-
-const StudentCoursesRouteChildren: StudentCoursesRouteChildren = {
-  StudentCoursesGameRoute: StudentCoursesGameRouteWithChildren,
-  StudentCoursesIndexRoute: StudentCoursesIndexRoute,
-}
-
-const StudentCoursesRouteWithChildren = StudentCoursesRoute._addFileChildren(
-  StudentCoursesRouteChildren,
-)
-
-interface StudentRouteChildren {
-  StudentStudentRoute: typeof StudentStudentRoute
-  StudentCoursesRoute: typeof StudentCoursesRouteWithChildren
-}
-
-const StudentRouteChildren: StudentRouteChildren = {
-  StudentStudentRoute: StudentStudentRoute,
-  StudentCoursesRoute: StudentCoursesRouteWithChildren,
-}
-
-const StudentRouteWithChildren =
-  StudentRoute._addFileChildren(StudentRouteChildren)
-
-interface TeacherRouteChildren {
-  TeacherAccountRoute: typeof TeacherAccountRoute
-  TeacherDashboardRoute: typeof TeacherDashboardRoute
-  TeacherEnrollmentsRoute: typeof TeacherEnrollmentsRoute
-  TeacherAssignmentsCourseRoute: typeof TeacherAssignmentsCourseRoute
-  TeacherAssignmentsIndexRoute: typeof TeacherAssignmentsIndexRoute
-}
-
-const TeacherRouteChildren: TeacherRouteChildren = {
-  TeacherAccountRoute: TeacherAccountRoute,
-  TeacherDashboardRoute: TeacherDashboardRoute,
-  TeacherEnrollmentsRoute: TeacherEnrollmentsRoute,
-  TeacherAssignmentsCourseRoute: TeacherAssignmentsCourseRoute,
-  TeacherAssignmentsIndexRoute: TeacherAssignmentsIndexRoute,
-}
-
-const TeacherRouteWithChildren =
-  TeacherRoute._addFileChildren(TeacherRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
-  PlaygroundRoute: PlaygroundRouteWithChildren,
-  StudentRoute: StudentRouteWithChildren,
-  TeacherRoute: TeacherRouteWithChildren,
-  AboutRoute: AboutRoute,
+  DashboardRoute: DashboardRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

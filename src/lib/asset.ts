@@ -31,7 +31,6 @@ import runningMp3Url from "@/assets/game/sounds/running_in_grass.mp3?url";
 import tickMp3Url from "@/assets/game/sounds/tick.mp3?url";
 import rejectedMp3Url from "@/assets/game/sounds/rejected.mp3?url";
 import destroyMp3Url from "@/assets/game/sounds/destroy.mp3?url";
-import { Sound } from "@pixi/sound";
 
 export const spriteBundles = {
   maps: {
@@ -88,9 +87,7 @@ export type AtlasBundleName = keyof typeof atlasBundles;
  * - else → PIXI.Texture
  */
 export type BundleTextures<B extends BundleName> = {
-  readonly [K in keyof (typeof spriteBundles)[B]]: B extends "audio"
-    ? Sound
-    : Texture;
+  readonly [K in keyof (typeof spriteBundles)[B]]: Texture;
 };
 
 // Atlas bundles become Spritesheet + Texture

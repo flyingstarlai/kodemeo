@@ -1,5 +1,4 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import LandingPage from "@/features/site/components/landing-page.tsx";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -9,5 +8,5 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-  return <LandingPage />;
+  return <div>Redirect to dashboard...</div>;
 }

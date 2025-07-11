@@ -1,15 +1,6 @@
 import { z } from "zod";
-import {
-  loginStudentSchema,
-  loginSchema,
-  type registerSchema,
-} from "@/features/auth/schema.ts";
+import { loginSchema } from "@/features/auth/schema.ts";
 import type { User } from "@/features/me/types.ts";
-
-export interface LoginPayload {
-  email: string;
-  password: string;
-}
 
 export interface RegisterPayload {
   name: string;
@@ -21,17 +12,14 @@ export type AuthResponse = User & {
   token: string;
 };
 
-export interface StudentLoginPayload {
+export interface LoginPayload {
   code: string;
   username: string;
   password: string;
 }
 
-export interface StudentLoginResponse {
+export interface LoginResponse {
   token: string;
 }
 
-export type LoginStudentFormData = z.infer<typeof loginStudentSchema>;
-export type LoginFormData = z.infer<typeof loginSchema>;
-
-export type RegisterFormData = z.infer<typeof registerSchema>;
+export type loginFormData = z.infer<typeof loginSchema>;

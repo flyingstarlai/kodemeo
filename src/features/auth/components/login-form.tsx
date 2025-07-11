@@ -1,6 +1,6 @@
+import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import {
   Form,
   FormField,
@@ -8,33 +8,47 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form.tsx";
-import { Input } from "@/components/ui/input.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { Link, useNavigate } from "@tanstack/react-router";
-import type { LoginFormData } from "@/features/auth/types.ts";
-import { loginSchema } from "@/features/auth/schema.ts";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useLogin } from "@/features/auth/hooks/use-login.ts";
+import type { loginFormData } from "@/features/auth/types.ts";
+import { loginSchema } from "@/features/auth/schema.ts";
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import welcome from "@/assets/login.png";
-import React from "react";
 
 export const LoginForm: React.FC = () => {
+  const { room } = useSearch({ strict: false });
   const navigate = useNavigate({ from: "/" });
   const login = useLogin();
-  const form = useForm<LoginFormData>({
+
+  const roomStr = room != null ? String(room) : "";
+  const defaultCode = roomStr.length === 6 ? roomStr : "";
+  const form = useForm<loginFormData>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: {
+      code: defaultCode,
+      username: "",
+      password: "",
+    },
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    login.mutate(data, { onSuccess: () => navigate({ to: "/dashboard" }) });
+  const onSubmit = (data: loginFormData) => {
+    login.mutate(
+      {
+        code: data.code,
+        username: data.username,
+        password: data.password,
+      },
+      { onSuccess: () => navigate({ to: "/login" }) },
+    );
   };
 
   return (
     <div className="flex flex-col gap-6">
       <Card className="overflow-hidden p-0">
-        <CardContent className="grid p-0 md:grid-cols-2  min-h-[500px]">
+        <CardContent className="grid p-0 md:grid-cols-2">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -43,21 +57,30 @@ export const LoginForm: React.FC = () => {
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Welcome Back</h1>
                 <p className="text-muted-foreground text-balance">
-                  Login as Teacher
+                  Login as Student
                 </p>
               </div>
               <FormField
                 control={form.control}
-                name="email"
+                name="code"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Classroom Code</FormLabel>
                     <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="you@example.com"
-                        {...field}
-                      />
+                      <Input maxLength={6} placeholder="" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -70,11 +93,7 @@ export const LoginForm: React.FC = () => {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="••••••••"
-                        {...field}
-                      />
+                      <Input type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -85,27 +104,21 @@ export const LoginForm: React.FC = () => {
                 className="w-full"
                 disabled={login.isPending}
               >
-                {login.isPending ? "Logging in…" : "Login as Teacher"}
+                {login.isPending ? "Logging in…" : "Login"}
               </Button>
+
               <div className="text-center text-sm">
-                <Link
-                  to={"/student/login"}
-                  search={{ room: 0 }}
+                <a
+                  href="https://juniorcoder.id/login"
                   className="underline underline-offset-4"
                 >
-                  Login as <b>Student</b>
-                </Link>
-              </div>
-              <div className="text-center text-sm">
-                Don&apos;t have an account?{" "}
-                <Link to={"/register"} className="underline underline-offset-4">
-                  Sign up as <b>Teacher</b>
-                </Link>
+                  Login as <b>Teacher</b>
+                </a>
               </div>
             </form>
           </Form>
+
           <div className="bg-muted relative hidden md:block">
-            {" "}
             <img
               src={welcome}
               alt="Welcome illustration"

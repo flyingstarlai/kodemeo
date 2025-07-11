@@ -1,70 +1,39 @@
-import type { User } from "@/features/me/types.ts";
 import type {
-  AssignedCourseForStudent,
-  Classroom,
-  ClassroomDetail,
-} from "@/features/teacher/classroom/types.ts";
-import type { Course } from "@/features/teacher/courses/hooks/use-teacher-get-courses.ts";
-import type { QueryClient, QueryKey } from "@tanstack/react-query";
-import type { Enrollment } from "@/features/teacher/enrollment/types.ts";
-import type {
-  AssignedCourse,
   BeginResponse,
-  StudentChallengeScore,
-  StudentScoresResponse,
-} from "@/features/teacher/assignment/types.ts";
+  ChallengeScore,
+} from "@/features/dashboard/challenge/types";
+import type { User } from "@/features/me/types.ts";
+
+import type { QueryClient, QueryKey } from "@tanstack/react-query";
+import type { AssignedCourse } from "@/features/dashboard/course/types.ts";
 
 export const queryKeys = {
   user: ["user"] as const,
-  classrooms: ["classrooms"] as const,
-  courses: ["courses"] as const,
-  course: (id: string) => ["course", id] as const,
-
-  classroom: (id: string) => ["classroom", id] as const,
-  enrollments: (id: string) => ["enrollments", id] as const,
+  // Student-specific
   assignedCourses: (id: string) =>
     ["classroom", id, "assignedCourses"] as const,
-
-  // Student-specific
-  studentAssignedCourses: (id: string) =>
-    ["classroom", id, "studentAssignedCourses"] as const,
-  studentChallengeScores: (classroomId: string, assignedCourseId: string) =>
-    ["student", "assignments", classroomId, assignedCourseId] as const,
-  studentChallengeBegin: (
+  challengeScores: (classroomId: string, assignedCourseId: string) =>
+    ["dashboard", "assignments", classroomId, assignedCourseId] as const,
+  challengeBegin: (
     classroomId: string,
     assignedCourseId: string,
     challengeId: string,
   ) =>
     [
-      "student",
+      "dashboard",
       "assignments",
       classroomId,
       assignedCourseId,
       "challengeBegin",
       challengeId,
     ] as const,
-
-  // Teacher-specific
-  teacherAssignmentScores: (classroomId: string, courseSlug: string) =>
-    ["teacher", "assignments", classroomId, courseSlug] as const,
 };
 
 export type QueryDataMap = {
   user: User;
-  classrooms: Classroom[];
-  courses: Course[];
-  course: Course;
-  classroom: ClassroomDetail;
-  enrollments: Enrollment[];
   assignedCourses: AssignedCourse[];
-
-  // Student-specific data
-  studentAssignedCourses: AssignedCourseForStudent[];
-  studentChallengeScores: StudentChallengeScore[];
-  studentChallengeBegin: BeginResponse;
-
-  // Teacher-specific data
-  teacherAssignmentScores: StudentScoresResponse[];
+  challengeScores: ChallengeScore[];
+  challengeBegin: BeginResponse;
 };
 
 export function getQueryDataByKey<K extends keyof QueryDataMap>(

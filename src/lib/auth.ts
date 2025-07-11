@@ -30,12 +30,3 @@ export function isAuthenticated(): boolean {
   return !!user && user.exp * 1000 > Date.now();
 }
 
-export function isTeacher(): boolean {
-  const user = getUserFromToken();
-  return !!user && user.role === "TEACHER";
-}
-
-export function isStudent(): boolean {
-  const user = getUserFromToken();
-  return !!user && user.role === "STUDENT";
-}

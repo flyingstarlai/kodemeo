@@ -16,8 +16,9 @@ import {
   useParams,
   useSearch,
 } from "@tanstack/react-router";
-import { useStudentsGetChallenges } from "@/features/student/challenge/hooks/use-student-get-challenges.ts";
-import type { StudentChallengeResponse } from "@/features/teacher/assignment/types.ts";
+import { useGetChallenges } from "@/features/dashboard/challenge/hooks/use-get-challenges.ts";
+import type { ChallengeResponse } from "@/features/dashboard/challenge/types.ts";
+import { SoundToggle } from "@/components/sound-toggle.tsx";
 
 export function SiteHeader() {
   const location = useLocation();
@@ -27,9 +28,9 @@ export function SiteHeader() {
   });
   const { level: challengeId } = useSearch({ strict: false });
 
-  const { data: challenges } = useStudentsGetChallenges(courseSlug);
+  const { data: challenges } = useGetChallenges(courseSlug);
 
-  const challenge = useMemo<StudentChallengeResponse | undefined>(
+  const challenge = useMemo<ChallengeResponse | undefined>(
     () => challenges?.find((c) => c.challengeId === challengeId),
     [challenges, challengeId],
   );
@@ -48,7 +49,7 @@ export function SiteHeader() {
       const href = "/" + segments.slice(0, index + 1).join("/");
 
       // If segment matches assignmentId, show level
-      if (segment === "play") {
+      if (segment === "playground") {
         return { href, label: `${challenge?.level} / ${challenges?.length}` };
       }
 
@@ -87,6 +88,7 @@ export function SiteHeader() {
         </Breadcrumb>
 
         <div className="ml-auto flex items-center gap-2">
+          <SoundToggle />
           <ModeToggle />
         </div>
       </div>

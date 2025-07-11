@@ -2,7 +2,7 @@ import { create } from "zustand";
 import type {
   IWorkspaceItem,
   IHoverSlot,
-} from "@/features/student/command/types.ts";
+} from "@/features/dashboard/command/types.ts";
 
 interface DragDropStore {
   draggingItem: IWorkspaceItem | null;
