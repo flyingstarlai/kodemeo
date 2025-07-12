@@ -1,7 +1,6 @@
 import { useDragDropStore } from "@/stores/use-drag-drop-store";
 import React, { useEffect, useRef, useCallback } from "react";
 import type { ILoopCommand, IWorkspaceItem } from "../types";
-import { useSearch } from "@tanstack/react-router";
 import {
   findLoopWithChild,
   getInsertionIndex,
@@ -9,17 +8,14 @@ import {
 import { WorkspacePanel } from "@/features/dashboard/command/components/workspace-panel.tsx";
 import { PalettePanel } from "@/features/dashboard/command/components/pallete-panel.tsx";
 import { DragPreview } from "./drag-preview";
-import { DragHint } from "@/features/dashboard/command/components/drag-hint.tsx";
 import { playSound } from "@/lib/sounds.ts";
 import { useLevelStore } from "@/features/dashboard/game/store/use-level-store.ts";
 
-export const Command: React.FC = () => {
+export const CommandContainer: React.FC = () => {
   const panelRef = useRef<HTMLDivElement>(null);
   const paletteRef = useRef<HTMLDivElement>(null);
 
   const currentLevel = useLevelStore((s) => s.currentLevel);
-
-  const { level } = useSearch({ strict: false });
 
   const {
     draggingItem,
@@ -183,6 +179,7 @@ export const Command: React.FC = () => {
      * - Moves or removes items according to whether they came from a loop, workspace, or palette.
      */
     const handleUp = (e: PointerEvent) => {
+      console.log("dragging", draggingItem);
       if (!draggingItem) return;
       const guides = currentLevel?.guides ?? [];
 
@@ -190,8 +187,8 @@ export const Command: React.FC = () => {
         e.clientX,
         e.clientY,
       ) as HTMLElement | null;
-      const isInWorkspace = !!panelRef.current?.contains(targetEl as Node);
-      const isInPalette = !!paletteRef.current?.contains(targetEl as Node);
+      const isInWorkspace = !!targetEl?.closest('[data-dropzone="workspace"]');
+      const isInPalette = !!targetEl?.closest('[data-dropzone="palette"]');
 
       // Clone workspaceItems to avoid direct mutation
       let updatedItems = [...workspaceItems];
@@ -347,21 +344,10 @@ export const Command: React.FC = () => {
     currentLevel?.guides,
   ]);
 
-  useEffect(() => {
-    setWorkspaceItems([]);
-  }, [level, setWorkspaceItems]);
-
   return (
     <div className="relative flex flex-col gap-y-2 touch-none h-[230px]">
       <WorkspacePanel ref={panelRef} />
       <PalettePanel ref={paletteRef} />
-      {workspaceItems.length === 0 && !draggingItem && currentLevel && (
-        <DragHint
-          paletteRef={paletteRef}
-          workspaceRef={panelRef}
-          level={currentLevel}
-        />
-      )}
       <DragPreview />
     </div>
   );

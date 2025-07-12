@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Application, extend } from "@pixi/react";
 import { AnimatedSprite, Container, Graphics, Sprite, Text } from "pixi.js";
 import { BackgroundSprite } from "@/features/dashboard/game/renders/background-sprite.tsx";
@@ -12,11 +12,26 @@ import { SubmitChallengeEffect } from "@/features/dashboard/game/components/subm
 import { LevelLoader } from "@/features/dashboard/game/components/level-loader.tsx";
 import { ScreenTransition } from "@/features/dashboard/game/renders/screen-transition.tsx";
 import { BoardContainer } from "./board-container.tsx";
-import { WorldContainer } from "./world-container.tsx";
-import { ScreenResponsive } from "@/features/dashboard/game/components/screen-responsive.tsx";
+import { ResizeSync } from "@/features/dashboard/game/components/resize-sync.tsx";
+import { GameConstants } from "@/features/dashboard/game/constans.ts";
+import {
+  WorldScrollableContainer,
+  type ScrollableContentHandle,
+} from "@/features/dashboard/game/components/world-scrollable-container.tsx";
+import { Button } from "@/components/ui/button.tsx";
+import { usePlayerStore } from "@/features/dashboard/game/store/use-player-store.ts";
+import { IconFocusCentered } from "@tabler/icons-react";
+import { getPlayerGlobalPosition } from "@/lib/position.ts";
+import { CommandSheetContainer } from "@/features/dashboard/command/components/command-sheet-container.tsx";
 
 const GameCanvas: React.FC = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<ScrollableContentHandle>(null);
+  const [screen, setScreen] = useState({
+    width: GameConstants.GAME_WIDTH,
+    height: GameConstants.GAME_HEIGHT,
+  });
+  const [spriteData] = usePlayerStore((s) => s.sprites);
 
   extend({
     Container,
@@ -30,28 +45,50 @@ const GameCanvas: React.FC = () => {
     <div
       id="canvas-wrapper"
       ref={wrapperRef}
-      className="flex-1 min-h-0 overflow-hidden lg:rounded-lg lg:shadow-xs"
+      className="relative flex-1 min-h-0 overflow-hidden lg:rounded-lg lg:shadow-xs"
     >
+      <div className="absolute top-4 right-4 z-10 flex gap-2">
+        <Button
+          variant="secondary"
+          onClick={() => {
+            const { posX, posY } = getPlayerGlobalPosition(
+              spriteData.x,
+              spriteData.y,
+            );
+            scrollRef.current?.scrollToCenter(posX, posY);
+          }}
+        >
+          <IconFocusCentered />
+        </Button>
+        <CommandSheetContainer />
+      </div>
       <Application
-        key={`game-${Math.random()}`}
+        width={screen.width}
+        height={screen.height}
         resolution={Math.max(window.devicePixelRatio, 2)}
         backgroundColor={0x2a8431}
         className="w-full h-full lg:rounded-lg overflow-hidden"
       >
         <WorldInitializer />
-        <WorldContainer>
+        <WorldScrollableContainer
+          ref={scrollRef}
+          screenWidth={screen.width}
+          screenHeight={screen.height}
+          contentWidth={GameConstants.GAME_WIDTH}
+          contentHeight={GameConstants.GAME_HEIGHT}
+        >
           <BackgroundSprite />
 
           <BoardContainer>
             <LevelSprite />
-            <ScoreText />
             <CollectibleAnimatedSprite />
             <TreasureSprite />
-            <PlayerAnimatedSprite />
+            <PlayerAnimatedSprite scrollRef={scrollRef} />
           </BoardContainer>
-        </WorldContainer>
+        </WorldScrollableContainer>
+        <ScoreText />
         <ScreenTransition color={0x2a8431} />
-        <ScreenResponsive resizeRef={wrapperRef} />
+        <ResizeSync resizeRef={wrapperRef} onResize={setScreen} />
       </Application>
       <SubmitChallengeEffect />
       <LevelLoader />

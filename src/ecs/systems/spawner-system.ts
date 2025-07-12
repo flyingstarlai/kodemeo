@@ -23,6 +23,7 @@ import type { LevelData } from "@/features/dashboard/challenge/types.ts";
 import { sysLogger } from "@/lib/logger.ts";
 import { getCenteredTilePosition } from "@/lib/tiles.ts";
 import { getRotationFromFacing } from "@/lib/rotation.ts";
+import { useUIStore } from "@/features/dashboard/game/store/use-ui-store.ts";
 
 @system(spawnerGroup)
 export class SpawnerSystem extends System {
@@ -105,6 +106,8 @@ export class SpawnerSystem extends System {
       { coins: 0 },
       PlayerTag,
     );
+
+    useUIStore.getState().scrollToCenter({ x, y });
   }
 
   spawnTreasure(level: LevelData) {

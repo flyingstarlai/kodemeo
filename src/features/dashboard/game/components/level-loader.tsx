@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { useCycleStore } from "@/features/dashboard/game/store/use-cycle-store.ts";
 import { useChallengeTokenStore } from "@/features/dashboard/game/store/use-challenge-token-store.ts";
 import { usePopupStore } from "@/features/dashboard/game/store/use-popup-store.ts";
+import { useDragDropStore } from "@/stores/use-drag-drop-store.ts";
 
 export const LevelLoader: React.FC = () => {
   const { id, token } = useChallengeTokenStore();
@@ -13,6 +14,7 @@ export const LevelLoader: React.FC = () => {
   const { currentChallenge: challenge } = useCurrentLevel();
   const setMaxCoins = useCollectibleStore((s) => s.setMaxCoins);
   const triggerCleanup = useCycleStore((s) => s.triggerCleanup);
+  const setWorkspace = useDragDropStore((s) => s.setWorkspaceItems);
 
   const prevChallengeId = useRef<string | null>(null);
 
@@ -21,6 +23,7 @@ export const LevelLoader: React.FC = () => {
 
     if (prevChallengeId.current !== challenge.challengeId) {
       console.log("CLEANUP");
+      setWorkspace([]);
       triggerCleanup(true);
     }
 
@@ -56,6 +59,7 @@ export const LevelLoader: React.FC = () => {
     setMaxCoins,
     showDialog,
     triggerCleanup,
+    setWorkspace,
   ]);
   return null;
 };

@@ -14,6 +14,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as DashboardRouteImport } from './routes/_dashboard'
 import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardMapRouteImport } from './routes/_dashboard/map'
 import { Route as DashboardDashboardRouteImport } from './routes/_dashboard/dashboard'
 import { Route as DashboardAccountRouteImport } from './routes/_dashboard/account'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
@@ -40,6 +41,11 @@ const IndexRoute = IndexRouteImport.update({
 const DashboardCoursesRoute = DashboardCoursesRouteImport.update({
   id: '/courses',
   path: '/courses',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardMapRoute = DashboardMapRouteImport.update({
+  id: '/map',
+  path: '/map',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardDashboardRoute = DashboardDashboardRouteImport.update({
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof AuthLoginRoute
   '/account': typeof DashboardAccountRoute
   '/dashboard': typeof DashboardDashboardRoute
+  '/map': typeof DashboardMapRoute
   '/courses': typeof DashboardCoursesGameRouteWithChildren
   '/courses/': typeof DashboardCoursesIndexRoute
   '/courses/$course/playground': typeof DashboardCoursesGameCoursePlaygroundRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/login': typeof AuthLoginRoute
   '/account': typeof DashboardAccountRoute
   '/dashboard': typeof DashboardDashboardRoute
+  '/map': typeof DashboardMapRoute
   '/courses': typeof DashboardCoursesIndexRoute
   '/courses/$course/playground': typeof DashboardCoursesGameCoursePlaygroundRoute
   '/courses/$course': typeof DashboardCoursesGameCourseIndexRoute
@@ -106,6 +114,7 @@ export interface FileRoutesById {
   '/_auth/login': typeof AuthLoginRoute
   '/_dashboard/account': typeof DashboardAccountRoute
   '/_dashboard/dashboard': typeof DashboardDashboardRoute
+  '/_dashboard/map': typeof DashboardMapRoute
   '/_dashboard/courses': typeof DashboardCoursesRouteWithChildren
   '/_dashboard/courses/_game': typeof DashboardCoursesGameRouteWithChildren
   '/_dashboard/courses/': typeof DashboardCoursesIndexRoute
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/account'
     | '/dashboard'
+    | '/map'
     | '/courses'
     | '/courses/'
     | '/courses/$course/playground'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/account'
     | '/dashboard'
+    | '/map'
     | '/courses'
     | '/courses/$course/playground'
     | '/courses/$course'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/_auth/login'
     | '/_dashboard/account'
     | '/_dashboard/dashboard'
+    | '/_dashboard/map'
     | '/_dashboard/courses'
     | '/_dashboard/courses/_game'
     | '/_dashboard/courses/'
@@ -181,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/courses'
       fullPath: '/courses'
       preLoaderRoute: typeof DashboardCoursesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/_dashboard/map': {
+      id: '/_dashboard/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof DashboardMapRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/_dashboard/dashboard': {
@@ -275,12 +294,14 @@ const DashboardCoursesRouteWithChildren =
 interface DashboardRouteChildren {
   DashboardAccountRoute: typeof DashboardAccountRoute
   DashboardDashboardRoute: typeof DashboardDashboardRoute
+  DashboardMapRoute: typeof DashboardMapRoute
   DashboardCoursesRoute: typeof DashboardCoursesRouteWithChildren
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardAccountRoute: DashboardAccountRoute,
   DashboardDashboardRoute: DashboardDashboardRoute,
+  DashboardMapRoute: DashboardMapRoute,
   DashboardCoursesRoute: DashboardCoursesRouteWithChildren,
 }
 

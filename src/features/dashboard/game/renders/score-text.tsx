@@ -1,7 +1,6 @@
 import { TextStyle } from "pixi.js";
 import { useAssets } from "@/providers/asset-context.ts";
 import { useCollectibleStore } from "@/features/dashboard/game/store/use-collectible-store.ts";
-import { GameConstants } from "@/features/dashboard/game/constans.ts";
 
 export const ScoreText: React.FC = () => {
   const { coin } = useAssets();
@@ -20,11 +19,7 @@ export const ScoreText: React.FC = () => {
   });
 
   return (
-    <pixiContainer
-      label="score"
-      x={GameConstants.TILE_SIZE * GameConstants.GRID_COLS}
-      y={0}
-    >
+    <pixiContainer label="score" x={10} y={10}>
       <pixiSprite texture={coin.animations["rotate"][0]} scale={0.8} />
       <pixiText text={score} style={style} x={48} y={3} />
     </pixiContainer>

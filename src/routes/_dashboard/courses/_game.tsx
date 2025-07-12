@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { MobileAlertDialog } from "@/components/mobile-alert-dialog.tsx";
 import { AssetProvider } from "@/providers/asset-provider.tsx";
 import { preloadSounds } from "@/lib/sounds.ts";
 import { useEffect, useState } from "react";
 import { useSidebar } from "@/components/ui/sidebar.tsx";
+import { MobileAlertDialog } from "@/components/mobile-alert-dialog.tsx";
 
 export const Route = createFileRoute("/_dashboard/courses/_game")({
   component: RouteComponent,
@@ -25,7 +25,7 @@ function RouteComponent() {
     };
 
     loadAssets().finally(() => {
-      if (window.innerWidth < 1200 && sidebar.state === "expanded") {
+      if (window.innerWidth < 1300 && sidebar.state === "expanded") {
         sidebar.toggleSidebar();
       }
     });

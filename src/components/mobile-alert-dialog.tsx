@@ -14,13 +14,13 @@ export function MobileAlertDialog() {
 
   useEffect(() => {
     // check on mount
-    if (typeof window !== "undefined" && window.innerWidth < 768) {
+    if (typeof window !== "undefined" && window.innerWidth < 640) {
       setOpen(true);
     }
 
     // optional: re-check on resize
     const onResize = () => {
-      if (window.innerWidth < 768) setOpen(true);
+      if (window.innerWidth < 640) setOpen(true);
       else setOpen(false);
     };
     window.addEventListener("resize", onResize);

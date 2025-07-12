@@ -38,7 +38,9 @@ function RouteComponent() {
         } as React.CSSProperties
       }
       className={clsx(
-        location.pathname.includes("courses") && "h-screen overflow-hidden",
+        (location.pathname.includes("courses") ||
+          location.pathname.includes("map")) &&
+          "h-screen overflow-hidden",
       )}
     >
       <AppSidebar variant="inset" />

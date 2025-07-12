@@ -19,6 +19,8 @@ import star0of3PngUrl from "@/assets/game/ui/star_0_3.png?url";
 import star1of3PngUrl from "@/assets/game/ui/star_1_3.png?url";
 import star2of3PngUrl from "@/assets/game/ui/star_2_3.png?url";
 import star3of3PngUrl from "@/assets/game/ui/star_3_3.png?url";
+import worldMapPngUrl from "@/assets/game/world-map.png?url";
+import mapArenaPreviewPngUrl from "@/assets/game/map_arena_preview.png?url";
 
 // AUDIO
 import hoverMp3Url from "@/assets/game/sounds/flag-hover.mp3?url";
@@ -37,6 +39,8 @@ export const spriteBundles = {
     bgArenaJson: mapArenaJsonUrl,
     mapAreaPng: mapArenaPngUrl,
     levelsJson: levelsJsonUrl,
+    worldMapPng: worldMapPngUrl,
+    arenaPreviewPng: mapArenaPreviewPngUrl,
   },
   stars: {
     star0of3: star0of3PngUrl,

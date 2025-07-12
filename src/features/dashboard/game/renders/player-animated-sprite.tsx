@@ -2,8 +2,13 @@ import { useAssets } from "@/providers/asset-context.ts";
 import React, { useEffect, useRef } from "react";
 import type { AnimatedSprite } from "pixi.js";
 import { usePlayerStore } from "@/features/dashboard/game/store/use-player-store.ts";
+import type { ScrollableContentHandle } from "@/features/dashboard/game/components/world-scrollable-container.tsx";
 
-export const PlayerAnimatedSprite: React.FC = () => {
+interface Props {
+  scrollRef: React.RefObject<ScrollableContentHandle | null>;
+}
+
+export const PlayerAnimatedSprite: React.FC<Props> = () => {
   const { cat } = useAssets();
   const [spriteData] = usePlayerStore((s) => s.sprites);
 

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import GameCanvas from "@/features/dashboard/game/components/game-canvas.tsx";
-import { Command } from "@/features/dashboard/command/components/command.tsx";
+import { CommandContainer } from "@/features/dashboard/command/components/command-container.tsx";
 import { ResultPopup } from "@/features/dashboard/game/components/result-popup.tsx";
 
 type PlayLevel = {
@@ -26,7 +26,9 @@ function RouteComponent() {
     >
       <ResultPopup />
       <GameCanvas />
-      <Command />
+      <div className="hide-on-short">
+        <CommandContainer />
+      </div>
     </div>
   );
 }

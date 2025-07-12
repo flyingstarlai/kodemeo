@@ -3,6 +3,7 @@ import stopIcon from "@/assets/command/stop-button.png";
 import React from "react";
 import { clsx } from "clsx";
 import { useUIStore } from "@/features/dashboard/game/store/use-ui-store.ts";
+import { useCommandSheetStore } from "@/features/dashboard/command/store/use-command-sheet-store.ts";
 
 interface CommandControlsProps {
   isRunning: boolean;
@@ -17,6 +18,7 @@ export const CommandControls: React.FC<CommandControlsProps> = ({
   disabled,
 }) => {
   const isPending = useUIStore((s) => s.isPendingCommand);
+  const { isOpen, toggle } = useCommandSheetStore();
   return (
     <div>
       {isPending ? (
@@ -28,6 +30,7 @@ export const CommandControls: React.FC<CommandControlsProps> = ({
           onClick={() => {
             if (!disabled) {
               onRun();
+              if (isOpen) toggle();
             }
           }}
           className={clsx(
