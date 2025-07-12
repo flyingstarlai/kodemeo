@@ -12,6 +12,7 @@ import type { FederatedPointerEvent } from "pixi.js";
 import { usePlayerStore } from "@/features/dashboard/game/store/use-player-store.ts";
 import { useUIStore } from "@/features/dashboard/game/store/use-ui-store.ts";
 import { getPlayerGlobalPosition } from "@/lib/position.ts";
+import { useCommandSheetStore } from "@/features/dashboard/command/store/use-command-sheet-store.ts";
 
 export interface ScrollableContentHandle {
   scrollBy: (dx: number, dy: number) => void;
@@ -38,7 +39,7 @@ export const WorldScrollableContainer = forwardRef<
     const [pos, setPos] = useState({ x: 0, y: 0 });
     const targetPos = useRef({ x: 0, y: 0 });
     const dragStart = useRef<{ x: number; y: number } | null>(null);
-
+    const isSheetOpen = useCommandSheetStore((s) => s.isOpen);
     const [spriteData] = usePlayerStore((s) => s.sprites);
     const pendingCommand = useUIStore((s) => s.isPendingCommand);
 
@@ -159,6 +160,7 @@ export const WorldScrollableContainer = forwardRef<
 
     // 🖱️ Pointer drag
     const onPointerDown = (e: FederatedPointerEvent) => {
+      if (isSheetOpen) return;
       dragStart.current = {
         x: e.global.x - targetPos.current.x,
         y: e.global.y - targetPos.current.y,
@@ -166,6 +168,7 @@ export const WorldScrollableContainer = forwardRef<
     };
 
     const onPointerMove = (e: FederatedPointerEvent) => {
+      if (isSheetOpen) return;
       if (!dragStart.current) return;
       const x = e.global.x - dragStart.current.x;
       const y = e.global.y - dragStart.current.y;
