@@ -126,7 +126,9 @@ export const ResultPopup = () => {
               <Button
                 variant="default"
                 onClick={handleContinue}
-                disabled={beginMutation.isPending}
+                disabled={
+                  beginMutation.isPending || !currentChallenge || !courseSlug
+                }
               >
                 {beginMutation.isPending ? (
                   <span className="flex items-center gap-2">

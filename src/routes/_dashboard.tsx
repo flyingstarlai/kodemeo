@@ -40,7 +40,7 @@ function RouteComponent() {
       className={clsx(
         (location.pathname.includes("courses") ||
           location.pathname.includes("map")) &&
-          "h-screen overflow-hidden",
+          "h-screen min-h-[100dvh]",
       )}
     >
       <AppSidebar variant="inset" />
