@@ -17,58 +17,65 @@ import { useCurrentLevel } from "@/features/dashboard/game/hooks/use-current-lev
 import { useNavigate, useParams } from "@tanstack/react-router";
 import { useBeginChallenge } from "@/features/dashboard/challenge/hooks/use-begin-challenge.ts";
 import { IconLoader } from "@tabler/icons-react";
+import { useChallengeTokenStore } from "@/features/dashboard/game/store/use-challenge-token-store.ts";
 
 export const ResultPopup = () => {
   const navigate = useNavigate({ from: "/courses/$course/playground" });
   const { course: courseSlug } = useParams({ strict: false });
-  const { open, onGoal, earnedStars, title, message, hideStar, closeDialog } =
-    usePopupStore();
-  const beginMutation = useBeginChallenge(courseSlug);
+  const {
+    open,
+    onGoal,
+    earnedStars,
+    title,
+    message,
+    hideStar,
+    closeDialog,
+    showDialog,
+  } = usePopupStore();
+  const { mutateAsync: beginNextChallenge, isPending: beginPending } =
+    useBeginChallenge(courseSlug);
   const { setCoins } = useCollectibleStore();
   const resetUIState = useUIStore((s) => s.resetUIState);
   const triggerCleanup = useCycleStore((s) => s.triggerCleanup);
   const { nextChallengeId, currentChallenge } = useCurrentLevel();
+  const { id, token, timestamp } = useChallengeTokenStore();
+
+  const isPending = beginPending;
 
   const handleRestart = () => {
     closeDialog();
-    // restart logic
     setCoins(0);
     resetUIState();
     triggerCleanup(true);
   };
 
   const handleContinue = async () => {
-    if (!nextChallengeId) return;
+    if (!nextChallengeId || !id || !token || !timestamp) return;
 
-    beginMutation.mutate(
-      { challengeId: nextChallengeId },
-      {
-        onSuccess: async () => {
-          closeDialog();
+    try {
+      const beginRes = await beginNextChallenge({
+        challengeId: nextChallengeId,
+      });
 
-          setCoins(0);
-          resetUIState();
-          await navigate({
-            to: "/courses/$course/playground",
-            search: {
-              level: nextChallengeId,
-            },
-          });
+      if (!beginRes.token) {
+        closeDialog();
+        showDialog(false, 0, "Oops!", "Gagal memulai level baru.", true);
+        return;
+      }
+
+      closeDialog();
+
+      setCoins(0);
+      resetUIState();
+      await navigate({
+        to: "/courses/$course/playground",
+        search: {
+          level: nextChallengeId,
         },
-        onError: (err: unknown) => {
-          console.error("❌ Gagal lanjut ke tantangan berikutnya:", err);
-          usePopupStore
-            .getState()
-            .showDialog(
-              false,
-              0,
-              "Oops!",
-              "Tidak bisa lanjut ke level berikutnya. Coba lagi ya.",
-              true,
-            );
-        },
-      },
-    );
+      });
+    } catch {
+      showDialog(false, 0, "Oops!", "Terjadi kesalahan pada server.", true);
+    }
   };
 
   const handleRedirect = async () => {
@@ -126,11 +133,9 @@ export const ResultPopup = () => {
               <Button
                 variant="default"
                 onClick={handleContinue}
-                disabled={
-                  beginMutation.isPending || !currentChallenge || !courseSlug
-                }
+                disabled={isPending || !currentChallenge || !courseSlug}
               >
-                {beginMutation.isPending ? (
+                {isPending ? (
                   <span className="flex items-center gap-2">
                     <IconLoader className="h-4 w-4 animate-spin" />
                     Loading...

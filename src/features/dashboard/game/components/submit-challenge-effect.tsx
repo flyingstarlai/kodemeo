@@ -3,12 +3,13 @@ import { useCompleteChallenge } from "@/features/dashboard/challenge/hooks/use-c
 import { useChallengeTokenStore } from "@/features/dashboard/game/store/use-challenge-token-store.ts";
 import { useManagerStore } from "@/features/dashboard/game/store/use-manager-store.ts";
 import { useParams } from "@tanstack/react-router";
+import { usePopupStore } from "@/features/dashboard/game/store/use-popup-store.ts";
 
 export const SubmitChallengeEffect: React.FC = () => {
   const { shouldSubmit, stars, markSubmitted } = useManagerStore();
   const { id, token, timestamp } = useChallengeTokenStore();
   const { course: courseSlug } = useParams({ strict: false });
-
+  const { showDialog } = usePopupStore();
   const { mutateAsync } = useCompleteChallenge(courseSlug);
 
   useEffect(() => {
@@ -22,15 +23,30 @@ export const SubmitChallengeEffect: React.FC = () => {
           token,
           timestamp,
         });
-      } catch (err) {
-        console.error("❌ Submit challenge failed:", err);
+      } catch {
+        showDialog(false, 0, "Oops!", "Gagal mengirim nilai.", true);
       } finally {
         markSubmitted();
+        showDialog(
+          true,
+          stars,
+          "Selamat",
+          "Kamu telah berhasil mencapai tujuan",
+        );
       }
     };
 
     run();
-  }, [shouldSubmit, token, timestamp, mutateAsync, markSubmitted, id, stars]);
+  }, [
+    shouldSubmit,
+    token,
+    timestamp,
+    mutateAsync,
+    markSubmitted,
+    id,
+    stars,
+    showDialog,
+  ]);
 
   return null;
 };

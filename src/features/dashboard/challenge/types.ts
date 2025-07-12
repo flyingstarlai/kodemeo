@@ -23,7 +23,7 @@ export interface CompleteChallengePayload {
 }
 
 export interface CompleteChallengeResponse {
-  token: string;
+  signature: string;
 }
 
 export interface ChallengeResponse {

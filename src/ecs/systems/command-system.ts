@@ -112,19 +112,19 @@ export class CommandSystem extends System {
 
       player.remove(Queue);
 
-      usePopupStore
-        .getState()
-        .showDialog(
-          onGoal,
-          stars,
-          onGoal ? "Selamat" : "Ooops!",
-          onGoal
-            ? "Kamu telah berhasil mencapai tujuan"
-            : "Kamu belum mencapai tujuan",
-        );
-
       if (onGoal) {
         useManagerStore.getState().markShouldSubmit(stars);
+      } else {
+        usePopupStore
+          .getState()
+          .showDialog(
+            onGoal,
+            stars,
+            onGoal ? "Selamat" : "Ooops!",
+            onGoal
+              ? "Kamu telah berhasil mencapai tujuan"
+              : "Kamu belum mencapai tujuan",
+          );
       }
 
       return;
