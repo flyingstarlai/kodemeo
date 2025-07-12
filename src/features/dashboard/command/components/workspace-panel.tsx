@@ -144,7 +144,7 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
 
   const renderGuideItem = (): ReactNode => {
     return (
-      <div className="absolute inset-0 flex flex-items justify-start items-center px-2 gap-2 pointer-events-none">
+      <div className="absolute inset-0 flex flex-items justify-start items-center px-2  gap-2 pointer-events-none">
         {guideItems.map((item) => (
           <div key={item.id} data-workspace-item={true}>
             {item.command === "loop" ? (
@@ -164,11 +164,11 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
     );
   };
   return (
-    <div className="relative p-2 flex items-center justify-between border rounded dark:bg-zinc-800">
+    <div className="relative xl:px-2 xl:py-2 px-2 py-1 flex items-center justify-between border rounded dark:bg-zinc-800">
       <div
         ref={ref}
         data-dropzone="workspace"
-        className="flex w-full flex-wrap gap-2 min-h-[108px]"
+        className="flex w-full flex-wrap gap-2 xl:min-h-[108px] min-h-[90px]"
       >
         {visibleItems.map((item, idx) => renderItem(item, idx))}
 

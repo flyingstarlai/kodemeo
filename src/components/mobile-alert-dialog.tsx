@@ -12,34 +12,44 @@ import { Button } from "@/components/ui/button";
 export function MobileAlertDialog() {
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    // check on mount
-    if (typeof window !== "undefined" && window.innerWidth < 640) {
-      setOpen(true);
-    }
+  const checkOrientation = () => {
+    const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+    return isPortrait;
+  };
 
-    // optional: re-check on resize
-    const onResize = () => {
-      if (window.innerWidth < 640) setOpen(true);
-      else setOpen(false);
-    };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        setOpen(checkOrientation());
+      };
+
+      handleResize(); // check on mount
+      window.addEventListener("resize", handleResize);
+
+      return () => window.removeEventListener("resize", handleResize);
+    }
   }, []);
 
+  const handleOk = () => {
+    if (!checkOrientation()) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Device Not Supported</DialogTitle>
+          <DialogTitle>Rotate Your Device</DialogTitle>
           <DialogDescription>
-            This interactive coding-learning game is optimized for tablets and
-            desktops only. For the best experience and full functionality,
-            please play on a tablet or desktop device.
+            This game is best experienced in landscape mode. Please rotate your
+            device horizontally for the best experience.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button onClick={() => setOpen(false)}>OK</Button>
+          <Button onClick={handleOk}>OK</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -345,7 +345,7 @@ export const CommandContainer: React.FC = () => {
   ]);
 
   return (
-    <div className="relative flex flex-col gap-y-2 touch-none h-[230px]">
+    <div className="relative flex flex-col gap-y-2 touch-none xl:h-[230px] h-[190px]">
       <WorkspacePanel ref={panelRef} />
       <PalettePanel ref={paletteRef} />
       <DragPreview />

@@ -23,9 +23,9 @@ export const BaseCommand: React.FC<BaseCommandProps> = ({ item, active }) => {
   return (
     <div
       className={clsx(
-        "w-14 h-14 p-2 border rounded flex items-center justify-center flex-shrink-0 cursor-grab drag-handle",
+        "w-10 h-10 xl:w-14 xl:h-14 p-1 xl:p-2 border rounded flex items-center justify-center flex-shrink-0 cursor-grab drag-handle",
         variantMap[item.variant],
-        active && "border-4 shadow-lg shadow-green-400",
+        active && "border-4 shadow-xl shadow-green-400",
       )}
     >
       <img
@@ -35,8 +35,8 @@ export const BaseCommand: React.FC<BaseCommandProps> = ({ item, active }) => {
         alt={item.command}
         style={{ transform: rotationMap[item.command] }}
         className={clsx(
-          "w-6 h-6 pointer-events-none select-none",
-          !isDirection && "w-8 h-8",
+          "w-5 h-5 xl:w-6 xl:h-6 pointer-events-none select-none",
+          !isDirection && "w-6 h-6 xl:w-8 xl:h-8",
         )}
       />
     </div>

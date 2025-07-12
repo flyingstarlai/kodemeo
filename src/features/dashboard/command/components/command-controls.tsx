@@ -23,7 +23,7 @@ export const CommandControls: React.FC<CommandControlsProps> = ({
     <div>
       {isPending ? (
         <div onClick={onStop} className="opacity-70">
-          <img src={stopIcon} alt="stop" />
+          <img src={stopIcon} alt="stop" className="xl:w-16 w-14" />
         </div>
       ) : (
         <div
@@ -39,7 +39,7 @@ export const CommandControls: React.FC<CommandControlsProps> = ({
               : "cursor-pointer opacity-70",
           )}
         >
-          <img src={playIcon} alt="play" />
+          <img src={playIcon} alt="play" className="xl:w-16 w-14" />
         </div>
       )}
     </div>
