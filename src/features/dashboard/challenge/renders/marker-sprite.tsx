@@ -6,7 +6,7 @@ import {
   type TiledObject,
 } from "@/lib/tilemap-group.ts";
 import { useAssets } from "@/providers/asset-context.ts";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useGetChallenges } from "@/features/dashboard/challenge/hooks/use-get-challenges.ts";
 import { useBeginChallenge } from "@/features/dashboard/challenge/hooks/use-begin-challenge.ts";
@@ -16,7 +16,7 @@ import { playSound } from "@/lib/sounds.ts";
 interface MarkerSpriteProps {
   map: TiledMap;
   page: number;
-  courseSlug: string;
+  courseSlug?: string;
 }
 
 export const MarkerSprite: React.FC<MarkerSpriteProps> = ({
@@ -37,15 +37,23 @@ export const MarkerSprite: React.FC<MarkerSpriteProps> = ({
     return sliceSpritesheet(markerTex, markerTileset);
   }, [markerTex, markerTileset]);
 
+  useEffect(() => {
+    if (!page || !challenges) return;
+
+    const lastProgress = challenges
+      .filter((ch) => !ch.isLocked)
+      .reduce((max, ch) => (ch.level > max ? ch.level : max), 1);
+
+    console.log("MARKER: Last progress level:", lastProgress);
+  }, [challenges, page]);
+
   if (!markerTileset || markerFrames.length === 0) return null;
 
-  // cari group week_${page}
   const group = map.layers.find(
     (l): l is GroupLayer => l.type === "group" && l.name === `week_${page}`,
   );
   if (!group) return null;
 
-  // cari objectgroup marker
   const markerLayer = group.layers.find(
     (l): l is ObjectLayer => l.type === "objectgroup" && l.name === "marker",
   );
@@ -103,6 +111,8 @@ export const MarkerSprite: React.FC<MarkerSpriteProps> = ({
           else if (stars === 2) starTex = starTexs.star2of3;
           else if (stars === 3) starTex = starTexs.star3of3;
         }
+
+        console.log("render marker", challenge.level);
 
         return (
           <pixiContainer key={`marker-${obj.id}`} x={centerX} y={centerY}>

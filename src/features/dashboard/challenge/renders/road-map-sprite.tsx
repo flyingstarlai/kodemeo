@@ -10,6 +10,7 @@ import { useParams, useSearch } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { MarkerSprite } from "@/features/dashboard/challenge/renders/marker-sprite.tsx";
 import { ObjectMapSprite } from "@/features/dashboard/challenge/renders/object-map-sprite.tsx";
+import { ScrollToProgress } from "@/features/dashboard/challenge/components/scroll-to-progress.tsx";
 
 export const RoadMapSprite: React.FC = () => {
   const { maps } = useAssets();
@@ -62,7 +63,8 @@ export const RoadMapSprite: React.FC = () => {
 
       {/* 🔁 Render marker in separate component */}
       <ObjectMapSprite map={rawMap} page={page} />
-      <MarkerSprite map={rawMap} page={page} courseSlug={courseSlug!} />
+      <MarkerSprite map={rawMap} page={page} courseSlug={courseSlug} />
+      <ScrollToProgress map={rawMap} page={page} courseSlug={courseSlug} />
     </>
   );
 };

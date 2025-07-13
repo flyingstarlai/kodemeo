@@ -22,9 +22,10 @@ export function useResizePixiApp(
       timeout = setTimeout(() => {
         const w = wrapper.clientWidth;
         const h = wrapper.clientHeight;
+        if (!pixi?.app?.renderer) return;
+
         pixi.app.renderer.resize(w, h);
         setSize({ width: w, height: h });
-        console.log("ResizeObserver", w, h);
       }, 50); // tweak as needed
     };
 
