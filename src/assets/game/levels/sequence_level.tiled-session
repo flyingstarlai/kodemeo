@@ -38,16 +38,21 @@
                 3
             ],
             "scale": 1.0406,
-            "selectedLayer": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 671.7278493177015,
-                "y": 372.3813184701134
+                "x": 668.844897174707,
+                "y": 359.88852585047096
             }
         },
         "sequence_level.json#map_arena": {
             "scaleInDock": 1
         },
         "sequence_level.json#map_object": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "sequence_level.json#treasure": {
+            "dynamicWrapping": true,
             "scaleInDock": 1
         }
     },
@@ -60,6 +65,7 @@
     "openFiles": [
     ],
     "project": "sequence_level.tiled-project",
+    "property.type": "string",
     "recentFiles": [
         "../levels.json",
         "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/map_arena.json"
@@ -68,5 +74,6 @@
     "tileset.tileSize": {
         "height": 80,
         "width": 80
-    }
+    },
+    "tileset.type": 1
 }

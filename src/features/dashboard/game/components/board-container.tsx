@@ -5,6 +5,7 @@ export const BoardContainer: React.FC<React.PropsWithChildren> = ({
 }) => {
   const gridW = GameConstants.GRID_COLS * GameConstants.TILE_SIZE,
     gridH = GameConstants.GRID_ROWS * GameConstants.TILE_SIZE;
+
   return (
     <pixiContainer
       label="board_container"

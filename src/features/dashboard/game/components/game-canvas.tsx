@@ -18,11 +18,8 @@ import {
   WorldScrollableContainer,
   type ScrollableContentHandle,
 } from "@/features/dashboard/game/components/world-scrollable-container.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { usePlayerStore } from "@/features/dashboard/game/store/use-player-store.ts";
-import { IconFocusCentered } from "@tabler/icons-react";
-import { getPlayerGlobalPosition } from "@/lib/position.ts";
 import { CommandSheetContainer } from "@/features/dashboard/command/components/command-sheet-container.tsx";
+import { ScrollCenterButton } from "@/features/dashboard/game/components/scroll-center-button.tsx";
 
 const GameCanvas: React.FC = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -31,7 +28,6 @@ const GameCanvas: React.FC = () => {
     width: GameConstants.GAME_WIDTH,
     height: GameConstants.GAME_HEIGHT,
   });
-  const [spriteData] = usePlayerStore((s) => s.sprites);
 
   extend({
     Container,
@@ -41,6 +37,8 @@ const GameCanvas: React.FC = () => {
     Text,
   });
 
+  console.log("Sprite Data");
+
   return (
     <div
       id="canvas-wrapper"
@@ -48,18 +46,8 @@ const GameCanvas: React.FC = () => {
       className="relative flex-1 min-h-0 overflow-hidden lg:rounded-lg lg:shadow-xs"
     >
       <div className="absolute top-4 right-4 z-10 flex gap-2">
-        <Button
-          variant="secondary"
-          onClick={() => {
-            const { posX, posY } = getPlayerGlobalPosition(
-              spriteData.x,
-              spriteData.y,
-            );
-            scrollRef.current?.scrollToCenter(posX, posY);
-          }}
-        >
-          <IconFocusCentered />
-        </Button>
+        <ScrollCenterButton />
+
         <CommandSheetContainer />
       </div>
       <Application
@@ -83,7 +71,7 @@ const GameCanvas: React.FC = () => {
             <LevelSprite />
             <CollectibleAnimatedSprite />
             <TreasureSprite />
-            <PlayerAnimatedSprite scrollRef={scrollRef} />
+            <PlayerAnimatedSprite />
           </BoardContainer>
         </WorldScrollableContainer>
         <ScoreSprite />

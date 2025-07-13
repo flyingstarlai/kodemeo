@@ -1,4 +1,5 @@
 import { Texture, Rectangle } from "pixi.js";
+import type { LevelData } from "@/features/dashboard/challenge/types.ts";
 
 type BaseLayer = {
   id: number;
@@ -39,7 +40,13 @@ export interface ObjectLayer extends BaseLayer {
 export type GroupChildLayer = TileLayer | ObjectLayer | GroupLayer;
 
 export interface GroupLayer extends BaseLayer {
+  name: string;
   type: "group";
+  properties: {
+    name: string;
+    type: string;
+    value: string | number;
+  }[];
   layers: GroupChildLayer[];
 }
 
@@ -157,4 +164,88 @@ function flattenTileLayers(layers: GroupChildLayer[]): TileLayer[] {
   }
 
   return out;
+}
+
+type TilePosition = { col: number; row: number };
+
+export function getLayerTilePositions(
+  map: TiledMap,
+  levelName: string,
+  layerNames: string[],
+): Record<string, TilePosition[]> {
+  const group = map.layers.find(
+    (l) => l.type === "group" && l.name === levelName,
+  ) as GroupLayer | undefined;
+
+  if (!group) return {};
+
+  const result: Record<string, TilePosition[]> = {};
+
+  for (const layerName of layerNames) {
+    const tileLayer = group.layers.find(
+      (l) => l.type === "tilelayer" && l.name === layerName,
+    ) as TileLayer | undefined;
+
+    if (!tileLayer) continue;
+
+    const positions: TilePosition[] = [];
+
+    for (let index = 0; index < tileLayer.data.length; index++) {
+      const gid = tileLayer.data[index];
+      if (gid !== 0) {
+        const col = index % tileLayer.width;
+        const row = Math.floor(index / tileLayer.width);
+        positions.push({ col, row });
+      }
+    }
+
+    result[layerName] = positions;
+  }
+
+  return result;
+}
+
+export function extractLevelDataFromMap(
+  group: GroupLayer,
+  level: number,
+): LevelData {
+  const getPositions = (layerName: string): TilePosition[] => {
+    const layer = group.layers.find(
+      (l) => l.name === layerName && l.type === "tilelayer",
+    ) as TileLayer;
+    if (!layer) return [];
+
+    const positions: TilePosition[] = [];
+    for (let index = 0; index < layer.data.length; index++) {
+      if (layer.data[index] !== 0) {
+        const col = index % layer.width;
+        const row = Math.floor(index / layer.width);
+        positions.push({ col, row });
+      }
+    }
+    return positions;
+  };
+
+  const getProperty = <T extends string | number>(
+    name: string,
+  ): T | undefined => {
+    const prop = group.properties?.find((p) => p.name === name);
+    return prop?.value as T;
+  };
+
+  return {
+    level,
+    facing: getProperty<"up" | "down" | "left" | "right">("facing") ?? "right",
+    start: getPositions("start"),
+    collectible: getPositions("collectible"),
+    obstacle: getPositions("obstacle"),
+    goal: getPositions("goal"),
+    path: getPositions("path"),
+    maxStep: getProperty<number>("maxStep") ?? 10,
+    commands:
+      (getProperty<string>("commands")?.split(",") as LevelData["commands"]) ??
+      [],
+    guides:
+      (getProperty<string>("guides")?.split(",") as LevelData["guides"]) ?? [],
+  };
 }

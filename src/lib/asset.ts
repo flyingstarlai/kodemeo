@@ -11,6 +11,9 @@ import mapArenaPngUrl from "@/assets/game/map_arena.png?url";
 import levelsJsonUrl from "@/assets/game/levels.json?url";
 import chestClosedPngUrl from "@/assets/game/chest_closed.png?url";
 
+// GAME
+import sequenceLevelsJson from "@/assets/game/levels/sequence_level.json?url";
+
 // MAP LEVEL
 import mapFlagPngUrl from "@/assets/game/level_marker_flag.png?url";
 import mapSeqJson from "@/assets/game/map_seq.json?url";
@@ -60,6 +63,7 @@ export const spriteBundles = {
   sequence: {
     mapFlag: mapFlagPngUrl,
     mapSeq: mapSeqJson,
+    levels: sequenceLevelsJson,
   },
   chest: {
     chestClosed: chestClosedPngUrl,

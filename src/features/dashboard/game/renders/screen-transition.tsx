@@ -3,6 +3,7 @@ import { useTransitionStore } from "@/features/dashboard/game/store/use-transiti
 
 export const ScreenTransition: React.FC<{ color: number }> = ({ color }) => {
   const { progress } = useTransitionStore();
+
   return (
     <pixiGraphics
       label="transition"

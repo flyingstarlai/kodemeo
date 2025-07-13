@@ -32,8 +32,10 @@ export const ResultPopup = () => {
     closeDialog,
     showDialog,
   } = usePopupStore();
+
   const { mutateAsync: beginNextChallenge, isPending: beginPending } =
     useBeginChallenge(courseSlug);
+
   const { setCoins } = useCollectibleStore();
   const resetUIState = useUIStore((s) => s.resetUIState);
   const triggerCleanup = useCycleStore((s) => s.triggerCleanup);
