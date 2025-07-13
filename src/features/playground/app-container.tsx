@@ -31,7 +31,7 @@ export const AppContainer: React.FC = () => {
     Text,
   });
 
-  const { maps } = useAssets();
+  const { levels } = useAssets();
 
   return (
     <div
@@ -68,7 +68,7 @@ export const AppContainer: React.FC = () => {
           contentWidth={CONTENT_WIDTH}
           contentHeight={CONTENT_HEIGHT}
         >
-          <pixiSprite texture={maps.worldMapPng} x={0} y={0} />
+          <pixiSprite texture={levels.worldMapPng} x={0} y={0} />
         </HorizontalScrollView>
       </Application>
     </div>

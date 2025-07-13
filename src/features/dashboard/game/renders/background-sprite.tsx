@@ -7,10 +7,10 @@ import {
 } from "@/lib/tilemap.ts";
 
 export const BackgroundSprite = () => {
-  const { maps } = useAssets();
-  const rawMap = maps.bgArenaJson as unknown as TiledMap;
+  const { levels } = useAssets();
+  const rawMap = levels.bgArenaJson as unknown as TiledMap;
 
-  const sheetTex = maps.mapAreaPng;
+  const sheetTex = levels.mapAreaPng;
 
   const frames = React.useMemo(() => {
     return sliceSpritesheet(sheetTex, rawMap.tilesets[0]);

@@ -1,29 +1,30 @@
 import { Application, extend } from "@pixi/react";
 import { AnimatedSprite, Container, Graphics, Sprite, Text } from "pixi.js";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useParams, useSearch } from "@tanstack/react-router";
-import { WorldContainer } from "@/features/dashboard/game/components/world-container.tsx";
-import { ScreenResponsive } from "@/features/dashboard/game/components/screen-responsive.tsx";
-import { BackgroundMapSprite } from "@/features/dashboard/challenge/renders/background-map-sprite.tsx";
-import { ChallengeFlagsSprite } from "@/features/dashboard/challenge/renders/challenge-flags-sprite.tsx";
 import { SpriteButton } from "@/components/sprite-button.tsx";
 import { getAnimalFrame } from "@/lib/animals-frame.ts";
+import { RoadMapSprite } from "@/features/dashboard/challenge/renders/road-map-sprite.tsx";
+import {
+  type ScrollableContentHandle,
+  WorldScrollableContainer,
+} from "@/features/dashboard/game/components/world-scrollable-container.tsx";
+import { GameConstants } from "@/features/dashboard/game/constans.ts";
+import { ResizeSync } from "@/features/dashboard/game/components/resize-sync.tsx";
 
-const screenColor = 0xc9d308;
+const screenColor = 0x57ac23;
 
-const animals = [
-  "frog",
-  "duck",
-  "cat",
-  "owl",
-  "dog",
-  "tiger",
-  "zebra",
-  "elephant",
-];
+const animals = ["frog", "duck", "cat", "owl"];
 
 export const MapCanvas: React.FC = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<ScrollableContentHandle>(null);
+
+  const [screen, setScreen] = useState({
+    width: GameConstants.GAME_WIDTH,
+    height: GameConstants.GAME_HEIGHT,
+  });
+
   const { course: courseSlug } = useParams({ strict: false });
   const { page } = useSearch({ strict: false }) as { page: number };
   extend({
@@ -53,11 +54,16 @@ export const MapCanvas: React.FC = () => {
         backgroundColor={screenColor}
         className="w-full h-full lg:rounded-lg overflow-hidden"
       >
-        <WorldContainer>
-          <BackgroundMapSprite />
-          <ChallengeFlagsSprite />
-        </WorldContainer>
-        <ScreenResponsive resizeRef={wrapperRef} />
+        <WorldScrollableContainer
+          ref={scrollRef}
+          screenWidth={screen.width}
+          screenHeight={screen.height}
+          contentWidth={GameConstants.MAP_WIDTH}
+          contentHeight={GameConstants.MAP_HEIGHT}
+        >
+          <RoadMapSprite />
+        </WorldScrollableContainer>
+        <ResizeSync resizeRef={wrapperRef} onResize={setScreen} />
       </Application>
     </div>
   );

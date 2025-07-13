@@ -1,0 +1,86 @@
+{
+    "activeFile": "maps/sequence_map.json",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "House01_Blue.tsj": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "map_marker.json": {
+            "dynamicWrapping": false,
+            "scaleInDock": 2.1164
+        },
+        "map_object.json": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1.1264
+        },
+        "map_object.tsj": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "maps/sequence_map.json": {
+            "scale": 0.933375,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 800.3214142225793,
+                "y": 197.13405651533415
+            }
+        },
+        "maps/sequence_map.json#map_object": {
+            "scaleInDock": 1
+        },
+        "maps/sequence_map.json#road_tiles": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "road_tiles.json": {
+            "scale": 0.9026,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 722.357633503213,
+                "y": 38.77686682916021
+            }
+        },
+        "road_tiles.png": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "road_tiles.png.tsj": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1.04
+        },
+        "road_tiles.tsj": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "road_tilesets.json": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1.04
+        }
+    },
+    "last.imagePath": "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps",
+    "openFiles": [
+        "maps/sequence_map.json"
+    ],
+    "project": "challenge_map.tiled-project",
+    "property.type": "int",
+    "recentFiles": [
+        "maps/sequence_map.json",
+        "road_tiles.json",
+        "road_tilesets.json",
+        "road_tiles.png.tsj",
+        "road_tiles.tsj"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 120,
+        "width": 120
+    }
+}

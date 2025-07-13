@@ -20,12 +20,13 @@ export const AssetProvider: React.FC<PropsWithChildren> = ({ children }) => {
       loadBundle("stars"),
       loadBundleAtlas("cat"), // Spritesheet
       loadBundleAtlas("coin"), // Spritesheet
-      loadBundle("maps"), // JSON + Texture bundle
+      loadBundle("levels"), // JSON + Texture bundle
+      loadBundle("maps"),
       loadBundle("chest"), // Texture bundle
       loadBundle("sequence"),
     ])
-      .then(([stars, cat, coin, maps, chest, sequence]) => {
-        setAssets({ stars, cat, coin, maps, chest, sequence });
+      .then(([stars, cat, coin, levels, maps, chest, sequence]) => {
+        setAssets({ stars, cat, coin, levels, maps, chest, sequence });
       })
       .catch((err) => {
         console.error("Failed to load assets", err);

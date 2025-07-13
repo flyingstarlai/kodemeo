@@ -3,6 +3,8 @@ import type { LevelData } from "@/features/dashboard/challenge/types.ts";
 export const GameConstants = {
   GAME_WIDTH: 1280,
   GAME_HEIGHT: 720,
+  MAP_WIDTH: 1600,
+  MAP_HEIGHT: 720,
   GRID_COLS: 9,
   GRID_ROWS: 5,
   TILE_SIZE: 80,

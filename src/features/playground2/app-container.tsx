@@ -35,7 +35,7 @@ export const AppContainer: React.FC = () => {
     Text,
   });
 
-  const { maps } = useAssets();
+  const { levels } = useAssets();
 
   const [playerPos, setPlayerPos] = useState({ x: 6, y: 4 }); // tile pos
 
@@ -90,7 +90,7 @@ export const AppContainer: React.FC = () => {
           contentWidth={CONTENT_WIDTH}
           contentHeight={CONTENT_HEIGHT}
         >
-          <pixiSprite texture={maps.arenaPreviewPng} x={0} y={0} />
+          <pixiSprite texture={levels.arenaPreviewPng} x={0} y={0} />
           <WorldContainer>
             <pixiGraphics
               x={playerX}

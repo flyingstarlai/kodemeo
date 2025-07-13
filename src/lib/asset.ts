@@ -21,6 +21,10 @@ import star2of3PngUrl from "@/assets/game/ui/star_2_3.png?url";
 import star3of3PngUrl from "@/assets/game/ui/star_3_3.png?url";
 import worldMapPngUrl from "@/assets/game/world-map.png?url";
 import mapArenaPreviewPngUrl from "@/assets/game/map_arena_preview.png?url";
+import sequenceMapUrl from "@/assets/game/maps/sequence_map.json?url";
+import roadTilesPngUrl from "@/assets/game/maps/road_tiles.png?url";
+import mapObjectTilesPgnUrl from "@/assets/game/maps/map_object.png?url";
+import mapMarkerTilesPngUrl from "@/assets/game/maps/map_marker.png?url";
 
 // AUDIO
 import hoverMp3Url from "@/assets/game/sounds/flag-hover.mp3?url";
@@ -35,12 +39,18 @@ import rejectedMp3Url from "@/assets/game/sounds/rejected.mp3?url";
 import destroyMp3Url from "@/assets/game/sounds/destroy.mp3?url";
 
 export const spriteBundles = {
-  maps: {
+  levels: {
     bgArenaJson: mapArenaJsonUrl,
     mapAreaPng: mapArenaPngUrl,
     levelsJson: levelsJsonUrl,
     worldMapPng: worldMapPngUrl,
     arenaPreviewPng: mapArenaPreviewPngUrl,
+  },
+  maps: {
+    sequenceMap: sequenceMapUrl,
+    roadTiles: roadTilesPngUrl,
+    mapObjectTiles: mapObjectTilesPgnUrl,
+    mapMarkerTiles: mapMarkerTilesPngUrl,
   },
   stars: {
     star0of3: star0of3PngUrl,

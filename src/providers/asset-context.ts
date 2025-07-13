@@ -6,11 +6,10 @@ export interface AssetContextType {
   // parsed atlas → Spritesheet
   cat: Spritesheet;
   coin: Spritesheet;
-  // generic bundles: JSON objects and Textures
+  levels: BundleTextures<"levels">;
   maps: BundleTextures<"maps">;
   chest: BundleTextures<"chest">;
   stars: BundleTextures<"stars">;
-  // audio URLs
   sequence: BundleTextures<"sequence">;
 }
 

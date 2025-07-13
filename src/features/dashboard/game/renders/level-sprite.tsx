@@ -8,9 +8,9 @@ import {
 } from "@/lib/tilemap.ts";
 
 export const LevelSprite: React.FC = () => {
-  const { maps } = useAssets();
-  const rawMap = maps.levelsJson as unknown as TiledMap;
-  const sheetTex = maps.mapAreaPng;
+  const { levels } = useAssets();
+  const rawMap = levels.levelsJson as unknown as TiledMap;
+  const sheetTex = levels.mapAreaPng;
 
   const frames = React.useMemo(() => {
     return sliceSpritesheet(sheetTex, rawMap.tilesets[0]);
