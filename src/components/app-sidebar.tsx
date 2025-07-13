@@ -16,8 +16,8 @@ import {
 import { Link } from "@tanstack/react-router";
 
 const baseNav = [
-  { title: "Home", url: "/dashboard", icon: IconHome },
-  { title: "Courses", url: "/courses", icon: IconBooks },
+  { title: "Beranda", url: "/dashboard", icon: IconHome },
+  { title: "Kelas", url: "/courses", icon: IconBooks },
 ];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

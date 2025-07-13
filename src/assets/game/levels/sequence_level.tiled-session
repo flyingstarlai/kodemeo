@@ -1,0 +1,72 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "../levels.json": {
+            "scale": 1.5176249999999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.84844740960386,
+                "y": 265.8759574993823
+            }
+        },
+        "../levels.json#map_arena": {
+            "scaleInDock": 1
+        },
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/map_arena.json": {
+            "scale": 1.1667187499999998,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 575.9742868621938,
+                "y": 415.26717557251914
+            }
+        },
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/map_arena.json#map_arena": {
+            "scaleInDock": 1
+        },
+        "sequence_level.json": {
+            "expandedGroupLayers": [
+                3
+            ],
+            "scale": 1.0406,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 671.7278493177015,
+                "y": 372.3813184701134
+            }
+        },
+        "sequence_level.json#map_arena": {
+            "scaleInDock": 1
+        },
+        "sequence_level.json#map_object": {
+            "scaleInDock": 1
+        }
+    },
+    "last.imagePath": "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/levels",
+    "map.height": 9,
+    "map.lastUsedFormat": "json",
+    "map.tileHeight": 80,
+    "map.tileWidth": 80,
+    "map.width": 16,
+    "openFiles": [
+    ],
+    "project": "sequence_level.tiled-project",
+    "recentFiles": [
+        "../levels.json",
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/map_arena.json"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 80,
+        "width": 80
+    }
+}

@@ -20,6 +20,15 @@ import { useGetChallenges } from "@/features/dashboard/challenge/hooks/use-get-c
 import type { ChallengeResponse } from "@/features/dashboard/challenge/types.ts";
 import { SoundToggle } from "@/components/sound-toggle.tsx";
 
+const SEGMENT_ALIAS: Record<string, string> = {
+  account: "Akun",
+  dashboard: "Beranda",
+  courses: "Kelas",
+  sequence: "Urutan",
+  loops: "Perulangan",
+  procedure: "Prosedur",
+};
+
 export function SiteHeader() {
   const location = useLocation();
   const segments = location.pathname.split("/").filter(Boolean);
@@ -37,6 +46,7 @@ export function SiteHeader() {
 
   // Format a segment for breadcrumb label
   const formatLabel = (segment: string) =>
+    SEGMENT_ALIAS[segment] ||
     segment
       .split("-")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))

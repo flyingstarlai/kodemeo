@@ -29,7 +29,7 @@ import { useNavigate } from "@tanstack/react-router";
 export function NavUser() {
   const queryClient = useQueryClient();
   const user = queryClient.getQueryData<User>(["user"]);
-  const { isMobile } = useSidebar();
+  const { isMobile, setOpenMobile } = useSidebar();
   const navigate = useNavigate({ from: "/" });
   const logout = useLogout();
 
@@ -77,7 +77,12 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => navigate({ to: "/account" })}>
+              <DropdownMenuItem
+                onClick={() => {
+                  setOpenMobile(false);
+                  navigate({ to: "/account" });
+                }}
+              >
                 <IconUserCircle />
                 Account
               </DropdownMenuItem>

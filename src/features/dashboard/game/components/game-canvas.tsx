@@ -7,7 +7,7 @@ import { WorldInitializer } from "@/features/dashboard/game/components/world-ini
 import { PlayerAnimatedSprite } from "@/features/dashboard/game/renders/player-animated-sprite.tsx";
 import { CollectibleAnimatedSprite } from "@/features/dashboard/game/renders/collectible-animated-sprite.tsx";
 import { TreasureSprite } from "@/features/dashboard/game/renders/treasure-sprite.tsx";
-import { ScoreText } from "@/features/dashboard/game/renders/score-text.tsx";
+import { ScoreSprite } from "@/features/dashboard/game/renders/score-sprite.tsx";
 import { SubmitChallengeEffect } from "@/features/dashboard/game/components/submit-challenge-effect.tsx";
 import { LevelLoader } from "@/features/dashboard/game/components/level-loader.tsx";
 import { ScreenTransition } from "@/features/dashboard/game/renders/screen-transition.tsx";
@@ -86,7 +86,7 @@ const GameCanvas: React.FC = () => {
             <PlayerAnimatedSprite scrollRef={scrollRef} />
           </BoardContainer>
         </WorldScrollableContainer>
-        <ScoreText />
+        <ScoreSprite />
         <ScreenTransition color={0x2a8431} />
         <ResizeSync resizeRef={wrapperRef} onResize={setScreen} />
       </Application>

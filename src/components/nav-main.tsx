@@ -9,6 +9,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Link } from "@tanstack/react-router";
 import { Collapsible } from "@radix-ui/react-collapsible";
@@ -31,6 +32,8 @@ export function NavMain({
     }[];
   }[];
 }) {
+  const { setOpenMobile } = useSidebar();
+
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -43,7 +46,9 @@ export function NavMain({
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton tooltip={item.title}>
                   {item.icon && <item.icon />}
-                  <Link to={item.url}>{item.title}</Link>
+                  <Link onClick={() => setOpenMobile(false)} to={item.url}>
+                    {item.title}
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ) : (
@@ -56,7 +61,9 @@ export function NavMain({
                   <CollapsibleTrigger asChild>
                     <SidebarMenuButton tooltip={item.title}>
                       {item.icon && <item.icon />}
-                      <Link to={item.url}>{item.title}</Link>
+                      <Link onClick={() => setOpenMobile(false)} to={item.url}>
+                        {item.title}
+                      </Link>
                       <PlusIcon className="ml-auto group-data-[state=open]/collapsible:hidden" />
                       <MinusIcon className="ml-auto group-data-[state=closed]/collapsible:hidden" />
                     </SidebarMenuButton>
@@ -66,7 +73,12 @@ export function NavMain({
                       {item.subItems.map((sub) => (
                         <SidebarMenuSubItem key={sub.title}>
                           <SidebarMenuSubButton asChild>
-                            <Link to={sub.url}>{sub.title}</Link>
+                            <Link
+                              onClick={() => setOpenMobile(false)}
+                              to={sub.url}
+                            >
+                              {sub.title}
+                            </Link>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}

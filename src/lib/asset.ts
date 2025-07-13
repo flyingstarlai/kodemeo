@@ -12,7 +12,6 @@ import levelsJsonUrl from "@/assets/game/levels.json?url";
 import chestClosedPngUrl from "@/assets/game/chest_closed.png?url";
 
 // MAP LEVEL
-import autumnMapPngUrl from "@/assets/game/autumn_path.png?url";
 import mapFlagPngUrl from "@/assets/game/level_marker_flag.png?url";
 import mapSeqJson from "@/assets/game/map_seq.json?url";
 import star0of3PngUrl from "@/assets/game/ui/star_0_3.png?url";
@@ -59,7 +58,6 @@ export const spriteBundles = {
     star3of3: star3of3PngUrl,
   },
   sequence: {
-    autumnMap: autumnMapPngUrl,
     mapFlag: mapFlagPngUrl,
     mapSeq: mapSeqJson,
   },

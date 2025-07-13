@@ -29,6 +29,7 @@ export const Route = createFileRoute("/_dashboard")({
 function RouteComponent() {
   const location = useLocation();
   useEnsureHasUser();
+
   return (
     <SidebarProvider
       style={

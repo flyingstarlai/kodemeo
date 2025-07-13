@@ -23,19 +23,27 @@
             "scaleInDock": 1
         },
         "maps/sequence_map.json": {
-            "scale": 0.933375,
-            "selectedLayer": 1,
+            "expandedGroupLayers": [
+                18,
+                5,
+                12
+            ],
+            "scale": 1.15,
+            "selectedLayer": 22,
             "viewCenter": {
-                "x": 800.3214142225793,
-                "y": 197.13405651533415
+                "x": 950.4347826086957,
+                "y": 319.5652173913044
             }
         },
-        "maps/sequence_map.json#map_object": {
+        "maps/sequence_map.json#map_marker": {
             "scaleInDock": 1
+        },
+        "maps/sequence_map.json#map_object": {
+            "scaleInDock": 0.9535
         },
         "maps/sequence_map.json#road_tiles": {
             "dynamicWrapping": false,
-            "scaleInDock": 1
+            "scaleInDock": 0.7823
         },
         "road_tiles.json": {
             "scale": 0.9026,
