@@ -31,6 +31,7 @@ export function useGetChallenges(courseSlug?: string) {
         `/assignments/${classroomId}/${courseSlug}`,
         withAuthConfig(),
       );
+
       return res.data;
     },
     enabled: Boolean(classroomId && courseSlug),

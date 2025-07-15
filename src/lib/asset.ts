@@ -13,6 +13,7 @@ import chestClosedPngUrl from "@/assets/game/chest_closed.png?url";
 
 // GAME
 import sequenceLevelsJson from "@/assets/game/levels/sequence_level.json?url";
+import mapArenaPng from "@/assets/game/levels/map_arena.png?url";
 
 // MAP LEVEL
 import mapFlagPngUrl from "@/assets/game/level_marker_flag.png?url";
@@ -24,6 +25,7 @@ import star3of3PngUrl from "@/assets/game/ui/star_3_3.png?url";
 import worldMapPngUrl from "@/assets/game/world-map.png?url";
 import mapArenaPreviewPngUrl from "@/assets/game/map_arena_preview.png?url";
 import sequenceMapUrl from "@/assets/game/maps/sequence_map.json?url";
+import loopMapUrl from "@/assets/game/maps/loop_map.json?url";
 import roadTilesPngUrl from "@/assets/game/maps/road_tiles.png?url";
 import mapObjectTilesPgnUrl from "@/assets/game/maps/map_object.png?url";
 import mapMarkerTilesPngUrl from "@/assets/game/maps/map_marker.png?url";
@@ -50,6 +52,7 @@ export const spriteBundles = {
   },
   maps: {
     sequenceMap: sequenceMapUrl,
+    loopMap: loopMapUrl,
     roadTiles: roadTilesPngUrl,
     mapObjectTiles: mapObjectTilesPgnUrl,
     mapMarkerTiles: mapMarkerTilesPngUrl,
@@ -64,6 +67,7 @@ export const spriteBundles = {
     mapFlag: mapFlagPngUrl,
     mapSeq: mapSeqJson,
     levels: sequenceLevelsJson,
+    arena: mapArenaPng,
   },
   chest: {
     chestClosed: chestClosedPngUrl,

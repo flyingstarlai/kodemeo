@@ -14,9 +14,12 @@ import { ScrollToProgress } from "@/features/dashboard/challenge/components/scro
 
 export const RoadMapSprite: React.FC = () => {
   const { maps } = useAssets();
-  const rawMap = maps.sequenceMap as unknown as TiledMap;
-  const { page } = useSearch({ strict: false });
   const { course: courseSlug } = useParams({ strict: false });
+
+  const rawMap = (courseSlug === "sequence"
+    ? maps.sequenceMap
+    : maps.loopMap) as unknown as TiledMap;
+  const { page } = useSearch({ strict: false });
 
   const roadTex = maps.roadTiles;
 

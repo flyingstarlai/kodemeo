@@ -25,8 +25,8 @@ function RouteComponent() {
     };
 
     loadAssets().finally(() => {
-      if (window.innerWidth < 1300 && sidebar.state === "expanded") {
-        sidebar.toggleSidebar();
+      if (window.innerWidth < 1300) {
+        sidebar.setOpen(false);
       }
     });
   }, []);

@@ -10,9 +10,9 @@ export const useCurrentLevel = () => {
     if (!challenges || !challengeId)
       return { currentChallenge: undefined, nextChallengeId: undefined };
 
-    const index = challenges.findIndex((c) => c.challengeId === challengeId);
+    const index = challenges.findIndex((c) => c.id === challengeId);
     const currentChallenge = challenges[index];
-    const nextChallengeId = challenges[index + 1]?.challengeId;
+    const nextChallengeId = challenges[index + 1]?.id;
 
     return { currentChallenge, nextChallengeId };
   }, [challenges, challengeId]);

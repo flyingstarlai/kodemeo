@@ -19,6 +19,7 @@ const rotationMap: Record<string, string> = {
 
 export const BaseCommand: React.FC<BaseCommandProps> = ({ item, active }) => {
   const isDirection = ["left", "right", "up", "down"].includes(item.command);
+  const isBlank = item.command === "blank";
 
   return (
     <div
@@ -28,17 +29,21 @@ export const BaseCommand: React.FC<BaseCommandProps> = ({ item, active }) => {
         active && "border-4 shadow-xl shadow-green-400",
       )}
     >
-      <img
-        draggable={false}
-        onDragStart={(e) => e.preventDefault()}
-        src={isDirection ? arrowIcon : pawIcon}
-        alt={item.command}
-        style={{ transform: rotationMap[item.command] }}
-        className={clsx(
-          "w-5 h-5 xl:w-6 xl:h-6 pointer-events-none select-none",
-          !isDirection && "w-6 h-6 xl:w-8 xl:h-8",
-        )}
-      />
+      {!isBlank ? (
+        <img
+          draggable={false}
+          onDragStart={(e) => e.preventDefault()}
+          src={isDirection ? arrowIcon : pawIcon}
+          alt={item.command}
+          style={{ transform: rotationMap[item.command] }}
+          className={clsx(
+            "w-5 h-5 xl:w-6 xl:h-6 pointer-events-none select-none",
+            !isDirection && "w-6 h-6 xl:w-8 xl:h-8",
+          )}
+        />
+      ) : (
+        <div className="text-green-600 font-extrabold text-2xl"> </div>
+      )}
     </div>
   );
 };

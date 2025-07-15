@@ -25,7 +25,7 @@ const SEGMENT_ALIAS: Record<string, string> = {
   dashboard: "Beranda",
   courses: "Kelas",
   sequence: "Urutan",
-  loops: "Perulangan",
+  loop: "Perulangan",
   procedure: "Prosedur",
 };
 
@@ -40,7 +40,7 @@ export function SiteHeader() {
   const { data: challenges } = useGetChallenges(courseSlug);
 
   const challenge = useMemo<ChallengeResponse | undefined>(
-    () => challenges?.find((c) => c.challengeId === challengeId),
+    () => challenges?.find((c) => c.id === challengeId),
     [challenges, challengeId],
   );
 

@@ -1,8 +1,10 @@
+import type { CommandType } from "@/ecs/components/logic/queue.ts";
+
 export type Variant = "direction" | "action" | "control";
 
 export interface IBaseCommand {
   id: string;
-  command: "left" | "right" | "up" | "down" | "scratch";
+  command: CommandType;
   parent: string | null;
   variant: Variant;
 }

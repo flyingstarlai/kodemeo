@@ -93,12 +93,16 @@ export const WorldScrollableContainer = forwardRef<
 
     useEffect(() => {
       if (scrollTarget) {
-        const { posX, posY } = getPlayerGlobalPosition(
-          scrollTarget.x,
-          scrollTarget.y,
-        );
-        scrollToCenterInternal(posX, posY);
-        console.log("Centered to", posX, posY);
+        scrollToCenterInternal(scrollTarget.x, scrollTarget.y);
+        // if (!scrollTarget.global) {
+        //   const { posX, posY } = getPlayerGlobalPosition(
+        //     scrollTarget.x,
+        //     scrollTarget.y,
+        //   );
+        //   scrollToCenterInternal(posX, posY);
+        // } else {
+        //   scrollToCenterInternal(scrollTarget.x, scrollTarget.y);
+        // }
       }
     }, [scrollTarget, scrollToCenterInternal]);
 

@@ -139,11 +139,12 @@ export class CommandSystem extends System {
     const destRow = gridPos.row + delta[1];
 
     // Validate destination
+    const gridOffset = 2;
     const isOutOfBounds =
-      destCol < 0 ||
-      destCol >= GameConstants.GRID_COLS ||
-      destRow < 0 ||
-      destRow >= GameConstants.GRID_ROWS;
+      destCol < gridOffset ||
+      destCol >= GameConstants.GRID_COLS - gridOffset ||
+      destRow < gridOffset ||
+      destRow >= GameConstants.GRID_ROWS - gridOffset;
 
     const isObstacle = challenge.obstacle.some(
       (p) => p.col === destCol && p.row === destRow,

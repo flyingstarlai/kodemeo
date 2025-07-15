@@ -205,10 +205,7 @@ export function getLayerTilePositions(
   return result;
 }
 
-export function extractLevelDataFromMap(
-  group: GroupLayer,
-  level: number,
-): LevelData {
+export function extractLevelDataFromMap(group: GroupLayer): LevelData {
   const getPositions = (layerName: string): TilePosition[] => {
     const layer = group.layers.find(
       (l) => l.name === layerName && l.type === "tilelayer",
@@ -234,7 +231,7 @@ export function extractLevelDataFromMap(
   };
 
   return {
-    level,
+    level: getProperty<number>("level") ?? 1,
     facing: getProperty<"up" | "down" | "left" | "right">("facing") ?? "right",
     start: getPositions("start"),
     collectible: getPositions("collectible"),
@@ -243,9 +240,12 @@ export function extractLevelDataFromMap(
     path: getPositions("path"),
     maxStep: getProperty<number>("maxStep") ?? 10,
     commands:
-      (getProperty<string>("commands")?.split(",") as LevelData["commands"]) ??
-      [],
+      (getProperty<string>("commands")
+        ?.split(",")
+        .map((cmd) => cmd.trim()) as LevelData["commands"]) ?? [],
     guides:
-      (getProperty<string>("guides")?.split(",") as LevelData["guides"]) ?? [],
+      (getProperty<string>("guides")
+        ?.split(",")
+        .map((cmd) => cmd.trim()) as LevelData["guides"]) ?? [],
   };
 }

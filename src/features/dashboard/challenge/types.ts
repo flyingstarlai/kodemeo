@@ -1,3 +1,5 @@
+import type { CommandType } from "@/ecs/components/logic/queue.ts";
+
 export interface ChallengeScore {
   challengeId: string;
   level: number;
@@ -27,12 +29,12 @@ export interface CompleteChallengeResponse {
 }
 
 export interface ChallengeResponse {
-  challengeId: string;
+  id: string;
+  week: number;
   level: number;
   title: string;
   stars: number;
   isLocked: boolean;
-  levelData: LevelData;
 }
 
 export interface LevelData {
@@ -44,6 +46,6 @@ export interface LevelData {
   goal: Array<{ col: number; row: number }>;
   path: Array<{ col: number; row: number }>;
   maxStep: number;
-  commands: Array<"up" | "down" | "left" | "right" | "scratch" | "loop">;
-  guides: Array<"up" | "down" | "left" | "right" | "scratch">;
+  commands: Array<CommandType | "loop">;
+  guides: Array<CommandType>;
 }

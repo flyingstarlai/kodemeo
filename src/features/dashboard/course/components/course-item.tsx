@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/button.tsx";
 import type { AssignedCourse } from "@/features/dashboard/course/types.ts";
 import { useEnrollCourse } from "@/features/dashboard/course/hooks/use-enroll-course.ts";
 import { useNavigate } from "@tanstack/react-router";
+import sequenceImage from "@/assets/course/sequence.png";
+import loopImage from "@/assets/course/loop.png";
 
 interface CourseItemProps {
   course: AssignedCourse;
@@ -49,14 +51,30 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course }) => {
     }
   };
 
+  const getImage = (slug: string) => {
+    if (slug === "sequence") {
+      return sequenceImage;
+    } else if (slug === "loop") {
+      return loopImage;
+    }
+
+    return sequenceImage;
+  };
+
   return (
     <>
       <Card className="hover:shadow-lg transition-shadow">
         <CardContent className="flex flex-col h-full">
+          <img
+            src={getImage(course.slug)}
+            alt="Course poster"
+            className="rounded-md mb-3 w-full object-cover max-h-100"
+          />
           <h3 className="text-lg font-semibold mb-2">{course.title}</h3>
           <p className="text-gray-600 flex-grow">{course.description}</p>
-          <p className="text-sm mt-2">
-            {course.isEnrolled ? "Enrolled" : "Not enrolled"}
+
+          <p className="text-sm mt-2 italic text-gray-400 font-bold">
+            {course.isEnrolled ? "Terdaftar" : "Belum terdaftar"}
           </p>
           <Button
             onClick={handleAction}
@@ -66,11 +84,11 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course }) => {
           >
             {enrollMutation.isPending
               ? course.isEnrolled
-                ? "Continuing…"
-                : "Enrolling…"
+                ? "Melanjutkan…"
+                : "Memulai…"
               : course.isEnrolled
-                ? "Continue"
-                : "Enroll Course"}
+                ? "Lanjutkan"
+                : "Mulai Kelas"}
           </Button>
         </CardContent>
       </Card>
@@ -81,14 +99,14 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course }) => {
           onPointerDownOutside={(e) => e.preventDefault()}
         >
           <DialogHeader>
-            <DialogTitle>Confirm Enrollment</DialogTitle>
+            <DialogTitle>Konfirmasi</DialogTitle>
             <DialogDescription>
-              Are you sure you want to enroll in "{course.title}"?
+              Apakah kamu ingin memulai kelas "{course.title}"?
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="flex justify-end space-x-2">
             <Button variant="outline" onClick={() => setConfirmOpen(false)}>
-              Cancel
+              Batal
             </Button>
             <Button
               onClick={() => {
@@ -97,7 +115,7 @@ export const CourseItem: React.FC<CourseItemProps> = ({ course }) => {
               }}
               disabled={enrollMutation.isPending}
             >
-              {enrollMutation.isPending ? "Enrolling…" : "Confirm"}
+              {enrollMutation.isPending ? "Memulai…" : "Mulai"}
             </Button>
           </DialogFooter>
         </DialogContent>

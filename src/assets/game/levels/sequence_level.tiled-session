@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "sequence_level.json",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -33,18 +33,79 @@
         "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/map_arena.json#map_arena": {
             "scaleInDock": 1
         },
-        "sequence_level.json": {
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/loop_map.json": {
             "expandedGroupLayers": [
-                3
+                5,
+                18
             ],
-            "scale": 1.0406,
-            "selectedLayer": 4,
+            "expandedObjectLayers": [
+                5,
+                17,
+                25,
+                8,
+                15,
+                12,
+                24,
+                18
+            ],
+            "scale": 0.8825,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 668.844897174707,
-                "y": 359.88852585047096
+                "x": 849.8583569405099,
+                "y": 529.7450424929178
             }
         },
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/loop_map.json#map_marker": {
+            "scaleInDock": 1
+        },
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/loop_map.json#map_object": {
+            "scaleInDock": 1
+        },
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/loop_map.json#road_tiles": {
+            "scaleInDock": 1
+        },
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/sequence_map.json": {
+            "expandedGroupLayers": [
+                18
+            ],
+            "expandedObjectLayers": [
+                31,
+                18
+            ],
+            "scale": 1.388,
+            "selectedLayer": 22,
+            "viewCenter": {
+                "x": 854.4668587896256,
+                "y": 456.41210374639775
+            }
+        },
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/sequence_map.json#map_marker": {
+            "scaleInDock": 1
+        },
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/sequence_map.json#map_object": {
+            "scaleInDock": 1
+        },
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/sequence_map.json#road_tiles": {
+            "scaleInDock": 1
+        },
+        "sequence_level.json": {
+            "expandedGroupLayers": [
+                29,
+                59
+            ],
+            "scale": 1.3434,
+            "selectedLayer": 55,
+            "viewCenter": {
+                "x": 582.8494863778473,
+                "y": 432.8569301771624
+            }
+        },
+        "sequence_level.json#level_placeholder": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
         "sequence_level.json#map_arena": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "sequence_level.json#map_object": {
@@ -56,17 +117,21 @@
             "scaleInDock": 1
         }
     },
-    "last.imagePath": "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/levels",
+    "last.imagePath": "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game",
     "map.height": 9,
     "map.lastUsedFormat": "json",
     "map.tileHeight": 80,
     "map.tileWidth": 80,
     "map.width": 16,
     "openFiles": [
+        "sequence_level.json"
     ],
     "project": "sequence_level.tiled-project",
-    "property.type": "string",
+    "property.type": "int",
     "recentFiles": [
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/sequence_map.json",
+        "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/loop_map.json",
+        "sequence_level.json",
         "../levels.json",
         "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/map_arena.json"
     ],
@@ -75,5 +140,5 @@
         "height": 80,
         "width": 80
     },
-    "tileset.type": 1
+    "tileset.type": 0
 }

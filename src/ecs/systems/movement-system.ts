@@ -103,7 +103,7 @@ export class MovementSystem extends System {
 
         usePopupStore
           .getState()
-          .showDialog(false, 0, "Oops!", "Kamu belum mencapai tujuan");
+          .showDialog(false, 0, "Oops!", "Kamu belum mencapai tujuan y");
         useUIStore.getState().setIsLevelFailed(true);
         useUIStore.getState().setIsPendingCommand(false);
       }

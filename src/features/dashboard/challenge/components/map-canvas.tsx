@@ -11,10 +11,14 @@ import {
 } from "@/features/dashboard/game/components/world-scrollable-container.tsx";
 import { GameConstants } from "@/features/dashboard/game/constans.ts";
 import { ResizeSync } from "@/features/dashboard/game/components/resize-sync.tsx";
+import { useGetAssignedCourse } from "@/features/dashboard/course/hooks/use-get-assigned-course.ts";
 
 const screenColor = 0x57ac23;
 
-const animals = ["frog", "duck", "cat", "owl"];
+const animals = {
+  sequence: ["frog", "duck", "cat", "owl"],
+  loop: ["dog", "zebra", "tiger", "elephant"],
+};
 
 export const MapCanvas: React.FC = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -35,6 +39,13 @@ export const MapCanvas: React.FC = () => {
     Text,
   });
 
+  const headerMenu =
+    courseSlug === "sequence" ? animals.sequence : animals.loop;
+
+  const { data: courses } = useGetAssignedCourse();
+  const course = courses?.find((c) => c.slug === courseSlug);
+  if (!course) return null;
+
   return (
     <div
       id="canvas-wrapper"
@@ -42,11 +53,25 @@ export const MapCanvas: React.FC = () => {
       className="relative   flex-1 min-h-0 overflow-hidden lg:rounded-lg lg:shadow-xs"
     >
       <div className="absolute top-2 left-1/2 z-10 flex -translate-x-1/2 space-x-2">
-        {animals.map((n, i) => (
-          <Link key={n} to="." search={() => ({ page: i + 1 })} replace>
-            <SpriteButton frame={getAnimalFrame(n)} active={page === i + 1} />
-          </Link>
-        ))}
+        {headerMenu.map((n, i) => {
+          const target = i + 1;
+          return (
+            <Link
+              key={n}
+              disabled={target > course.availableWeek}
+              to="."
+              search={() => ({ page: target })}
+              replace
+            >
+              <SpriteButton
+                key={n}
+                disabled={target > course.availableWeek}
+                frame={getAnimalFrame(n)}
+                active={page === i + 1}
+              />
+            </Link>
+          );
+        })}
       </div>
       <Application
         key={`map-${courseSlug}`}

@@ -4,6 +4,7 @@ import type { QueuedCommand } from "@/ecs/components/logic/queue.ts";
 interface ScrollTarget {
   x: number;
   y: number;
+  global?: boolean;
 }
 interface UIStore {
   scrollTarget: ScrollTarget | null;

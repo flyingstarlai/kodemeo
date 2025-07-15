@@ -1,6 +1,12 @@
 import { component, field } from "@lastolivegames/becsy";
 
-export type CommandType = "up" | "down" | "left" | "right" | "scratch";
+export type CommandType =
+  | "up"
+  | "down"
+  | "left"
+  | "right"
+  | "scratch"
+  | "blank";
 
 export interface QueuedCommand {
   id: string;

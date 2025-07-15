@@ -11,7 +11,6 @@ import { ScoreSprite } from "@/features/dashboard/game/renders/score-sprite.tsx"
 import { SubmitChallengeEffect } from "@/features/dashboard/game/components/submit-challenge-effect.tsx";
 import { LevelLoader } from "@/features/dashboard/game/components/level-loader.tsx";
 import { ScreenTransition } from "@/features/dashboard/game/renders/screen-transition.tsx";
-import { BoardContainer } from "./board-container.tsx";
 import { ResizeSync } from "@/features/dashboard/game/components/resize-sync.tsx";
 import { GameConstants } from "@/features/dashboard/game/constans.ts";
 import {
@@ -36,8 +35,6 @@ const GameCanvas: React.FC = () => {
     Graphics,
     Text,
   });
-
-  console.log("Sprite Data");
 
   return (
     <div
@@ -66,13 +63,10 @@ const GameCanvas: React.FC = () => {
           contentHeight={GameConstants.GAME_HEIGHT}
         >
           <BackgroundSprite />
-
-          <BoardContainer>
-            <LevelSprite />
-            <CollectibleAnimatedSprite />
-            <TreasureSprite />
-            <PlayerAnimatedSprite />
-          </BoardContainer>
+          <LevelSprite />
+          <CollectibleAnimatedSprite />
+          <TreasureSprite />
+          <PlayerAnimatedSprite />
         </WorldScrollableContainer>
         <ScoreSprite />
         <ScreenTransition color={0x2a8431} />

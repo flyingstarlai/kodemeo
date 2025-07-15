@@ -55,12 +55,14 @@ export const ScrollToProgress: React.FC<Props> = ({
 
     if (!targetObj) return;
 
-    scrollTo({
-      x: targetObj.x,
-      y: targetObj.y,
-    });
+    const timeout = setTimeout(() => {
+      scrollTo({
+        x: targetObj.x,
+        y: targetObj.y,
+      });
+    }, 1000);
 
-    console.log("Scroll to:", objName);
+    return () => clearTimeout(timeout);
   }, [challenges, map.layers, page, scrollTo]);
   return null;
 };

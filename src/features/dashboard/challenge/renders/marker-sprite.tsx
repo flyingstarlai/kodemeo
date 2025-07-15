@@ -40,11 +40,9 @@ export const MarkerSprite: React.FC<MarkerSpriteProps> = ({
   useEffect(() => {
     if (!page || !challenges) return;
 
-    const lastProgress = challenges
+    challenges
       .filter((ch) => !ch.isLocked)
       .reduce((max, ch) => (ch.level > max ? ch.level : max), 1);
-
-    console.log("MARKER: Last progress level:", lastProgress);
   }, [challenges, page]);
 
   if (!markerTileset || markerFrames.length === 0) return null;
@@ -98,7 +96,7 @@ export const MarkerSprite: React.FC<MarkerSpriteProps> = ({
 
         if (!challenge) return null;
 
-        const { challengeId, stars, isLocked } = challenge;
+        const { id, stars, isLocked } = challenge;
         if (!isLocked) texture = markerFrames[2];
 
         if (stars > 0) texture = markerFrames[7];
@@ -112,8 +110,6 @@ export const MarkerSprite: React.FC<MarkerSpriteProps> = ({
           else if (stars === 3) starTex = starTexs.star3of3;
         }
 
-        console.log("render marker", challenge.level);
-
         return (
           <pixiContainer key={`marker-${obj.id}`} x={centerX} y={centerY}>
             <pixiSprite
@@ -124,7 +120,7 @@ export const MarkerSprite: React.FC<MarkerSpriteProps> = ({
               anchor={0.5}
               scale={0.9}
               onPointerTap={() => {
-                handleStart(challengeId, isLocked);
+                handleStart(id, isLocked);
               }}
             />
             {starTex && (

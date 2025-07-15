@@ -179,7 +179,6 @@ export const CommandContainer: React.FC = () => {
      * - Moves or removes items according to whether they came from a loop, workspace, or palette.
      */
     const handleUp = (e: PointerEvent) => {
-      console.log("dragging", draggingItem);
       if (!draggingItem) return;
       const guides = currentLevel?.guides ?? [];
 
@@ -262,7 +261,8 @@ export const CommandContainer: React.FC = () => {
           guides.length > 0 &&
           (insertionIndex >= guides.length || // beyond guide range
             workspaceItems.length >= guides.length || // already filled all guides
-            draggingItem.command !== guides[insertionIndex]) // wrong command for this slot
+            (guides[insertionIndex] !== "blank" &&
+              draggingItem.command !== guides[insertionIndex])) // wrong command for this slot
         ) {
           resetDragState();
           playSound("onRejected", { volume: 0.1 });
