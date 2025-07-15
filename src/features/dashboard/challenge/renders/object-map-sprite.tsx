@@ -53,9 +53,10 @@ export const ObjectMapSprite: React.FC<Props> = ({ map, page }) => {
               width={obj.width}
               height={obj.height}
               texture={texture}
-              x={centerX}
-              y={centerY}
+              x={Math.round(centerX)}
+              y={Math.round(centerY)}
               anchor={0.5}
+              roundPixels
             />
           );
         }),

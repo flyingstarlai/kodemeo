@@ -133,13 +133,16 @@ export const WorldScrollableContainer = forwardRef<
       const dx = targetPos.current.x - pos.x;
       const dy = targetPos.current.y - pos.y;
 
-      if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
+      if (Math.abs(dx) > 1 || Math.abs(dy) > 1) {
         setPos((prev) => ({
           x: prev.x + dx * 0.1,
           y: prev.y + dy * 0.1,
         }));
       } else {
-        setPos(targetPos.current);
+        setPos({
+          x: Math.round(targetPos.current.x),
+          y: Math.round(targetPos.current.y),
+        });
       }
     });
 
@@ -185,8 +188,8 @@ export const WorldScrollableContainer = forwardRef<
 
     return (
       <pixiContainer
-        x={shouldScrollX ? pos.x : centerX}
-        y={shouldScrollY ? pos.y : centerY}
+        x={shouldScrollX ? Math.round(pos.x) : Math.round(centerX)}
+        y={shouldScrollY ? Math.round(pos.y) : Math.round(centerY)}
         scale={{ x: scale, y: scale }}
         eventMode="static"
         interactiveChildren

@@ -111,7 +111,11 @@ export const MarkerSprite: React.FC<MarkerSpriteProps> = ({
         }
 
         return (
-          <pixiContainer key={`marker-${obj.id}`} x={centerX} y={centerY}>
+          <pixiContainer
+            key={`marker-${obj.id}`}
+            x={Math.round(centerX)}
+            y={Math.round(centerY)}
+          >
             <pixiSprite
               eventMode="static"
               interactive={true}
