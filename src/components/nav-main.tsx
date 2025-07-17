@@ -44,12 +44,12 @@ export function NavMain({
           {items.map((item) =>
             !item.subItems?.length ? (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton tooltip={item.title}>
-                  {item.icon && <item.icon />}
-                  <Link onClick={() => setOpenMobile(false)} to={item.url}>
+                <Link onClick={() => setOpenMobile(false)} to={item.url}>
+                  <SidebarMenuButton tooltip={item.title}>
+                    {item.icon && <item.icon />}
                     {item.title}
-                  </Link>
-                </SidebarMenuButton>
+                  </SidebarMenuButton>
+                </Link>
               </SidebarMenuItem>
             ) : (
               <Collapsible
@@ -72,14 +72,14 @@ export function NavMain({
                     <SidebarMenuSub>
                       {item.subItems.map((sub) => (
                         <SidebarMenuSubItem key={sub.title}>
-                          <SidebarMenuSubButton asChild>
-                            <Link
-                              onClick={() => setOpenMobile(false)}
-                              to={sub.url}
-                            >
+                          <Link
+                            onClick={() => setOpenMobile(false)}
+                            to={sub.url}
+                          >
+                            <SidebarMenuSubButton asChild>
                               {sub.title}
-                            </Link>
-                          </SidebarMenuSubButton>
+                            </SidebarMenuSubButton>
+                          </Link>
                         </SidebarMenuSubItem>
                       ))}
                     </SidebarMenuSub>

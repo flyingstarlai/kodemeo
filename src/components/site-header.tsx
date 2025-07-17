@@ -60,7 +60,10 @@ export function SiteHeader() {
 
       // If segment matches assignmentId, show level
       if (segment === "playground") {
-        return { href, label: `${challenge?.level} / ${challenges?.length}` };
+        return {
+          href,
+          label: `${challenge?.level ?? 0} / ${challenges?.length}`,
+        };
       }
 
       return { href, label: formatLabel(segment) };

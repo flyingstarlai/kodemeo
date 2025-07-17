@@ -12,10 +12,12 @@ import {
   type TiledMap,
 } from "@/lib/tilemap-group.ts";
 import { useAssets } from "@/providers/asset-context.ts";
+import { useNavigate } from "@tanstack/react-router";
 
 export const LevelLoader: React.FC = () => {
   const { sequence } = useAssets();
   const { setCurrentLevel } = useLevelStore();
+  const navigate = useNavigate({ from: "/courses/$course/playground" });
   const { currentChallenge: challenge } = useCurrentLevel();
   const setMaxCoins = useCollectibleStore((s) => s.setMaxCoins);
   const triggerCleanup = useCycleStore((s) => s.triggerCleanup);
@@ -24,7 +26,10 @@ export const LevelLoader: React.FC = () => {
   const prevChallengeId = useRef<string | null>(null);
 
   useEffect(() => {
-    if (!challenge) return;
+    if (!challenge) {
+      navigate({ to: "/courses" });
+      return;
+    }
 
     if (prevChallengeId.current !== challenge.id) {
       setWorkspace([]);
