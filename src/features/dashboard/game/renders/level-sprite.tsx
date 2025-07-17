@@ -4,7 +4,7 @@ import {
   sliceSpritesheet,
   type TiledMap,
   getGroupLayers,
-} from "@/lib/tilemap-group.ts";
+} from "@/lib/tilemap.ts";
 import { useLevelStore } from "@/features/dashboard/game/store/use-level-store.ts";
 import { useAssets } from "@/providers/asset-context.ts";
 

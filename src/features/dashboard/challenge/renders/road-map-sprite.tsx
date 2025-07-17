@@ -4,7 +4,7 @@ import {
   getGroupLayers,
   type TiledMap,
   type TileLayer,
-} from "@/lib/tilemap-group.ts";
+} from "@/lib/tilemap.ts";
 import { useAssets } from "@/providers/asset-context.ts";
 import { useParams, useSearch } from "@tanstack/react-router";
 import { useMemo } from "react";

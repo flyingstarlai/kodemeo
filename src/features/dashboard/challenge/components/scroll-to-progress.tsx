@@ -1,6 +1,6 @@
 import { useGetChallenges } from "@/features/dashboard/challenge/hooks/use-get-challenges.ts";
 import { useEffect } from "react";
-import type { GroupLayer, ObjectLayer, TiledMap } from "@/lib/tilemap-group.ts";
+import type { GroupLayer, ObjectLayer, TiledMap } from "@/lib/tilemap.ts";
 import { useUIStore } from "@/features/dashboard/game/store/use-ui-store.ts";
 
 interface Props {

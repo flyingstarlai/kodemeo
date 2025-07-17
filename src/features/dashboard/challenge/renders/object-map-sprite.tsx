@@ -5,7 +5,7 @@ import {
   sliceSpritesheet,
   type TiledMap,
   type TiledObject,
-} from "@/lib/tilemap-group.ts";
+} from "@/lib/tilemap.ts";
 import { useMemo } from "react";
 
 interface Props {

@@ -21,10 +21,11 @@ import {
 import { inputGroup } from "./system-group.ts";
 import { usePopupStore } from "@/features/dashboard/game/store/use-popup-store.ts";
 import { useUIStore } from "@/features/dashboard/game/store/use-ui-store.ts";
+import { useManagerStore } from "@/features/dashboard/game/store/use-manager-store.ts";
+
 import { InputSystem } from "./index.ts";
 import { playSound } from "@/lib/sounds.ts";
 import { computeStars } from "@/lib/score.ts";
-import { useManagerStore } from "@/features/dashboard/game/store/use-manager-store.ts";
 
 @system(inputGroup, (s) => s.after(InputSystem))
 export class CommandSystem extends System {

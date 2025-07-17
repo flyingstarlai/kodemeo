@@ -36,9 +36,6 @@ export const ResultPopup = () => {
   const { mutateAsync: beginNextChallenge, isPending: beginPending } =
     useBeginChallenge(courseSlug);
 
-  const { setCoins } = useCollectibleStore();
-  const resetUIState = useUIStore((s) => s.resetUIState);
-  const triggerCleanup = useCycleStore((s) => s.triggerCleanup);
   const { nextChallengeId, currentChallenge } = useCurrentLevel();
   const { id, token, timestamp } = useChallengeTokenStore();
 
@@ -46,9 +43,9 @@ export const ResultPopup = () => {
 
   const handleRestart = () => {
     closeDialog();
-    setCoins(0);
-    resetUIState();
-    triggerCleanup(true);
+    useCollectibleStore.getState().setCoins(0);
+    useUIStore.getState().resetUIState();
+    useCycleStore.getState().triggerCleanup(true);
   };
 
   const handleContinue = async () => {
@@ -67,8 +64,8 @@ export const ResultPopup = () => {
 
       closeDialog();
 
-      setCoins(0);
-      resetUIState();
+      useCollectibleStore.getState().setCoins(0);
+      useUIStore.getState().resetUIState();
       await navigate({
         to: "/courses/$course/playground",
         search: {

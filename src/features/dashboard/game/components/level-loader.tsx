@@ -10,7 +10,7 @@ import {
   extractLevelDataFromMap,
   type GroupLayer,
   type TiledMap,
-} from "@/lib/tilemap-group.ts";
+} from "@/lib/tilemap.ts";
 import { useAssets } from "@/providers/asset-context.ts";
 import { useNavigate } from "@tanstack/react-router";
 
