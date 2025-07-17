@@ -23,6 +23,9 @@ import { useUIStore } from "@/features/dashboard/game/store/use-ui-store.ts";
 import { useCollectibleStore } from "@/features/dashboard/game/store/use-collectible-store.ts";
 import { useCycleStore } from "@/features/dashboard/game/store/use-cycle-store.ts";
 import { flattenWorkspaceItems } from "@/features/dashboard/command/utils/flatten-command.ts";
+import { useChallengeTokenStore } from "@/features/dashboard/game/store/use-challenge-token-store.ts";
+import { isTokenExpired } from "@/lib/expired.ts";
+import { usePopupStore } from "@/features/dashboard/game/store/use-popup-store.ts";
 
 export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
   const {
@@ -41,6 +44,7 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
   const { setCommands, setExecuteNow } = useManagerStore();
   const { currentCommand, isLevelFailed, setIsPendingCommand } = useUIStore();
 
+  const { token, timestamp } = useChallengeTokenStore();
   const challenge = useLevelStore((s) => s.currentLevel);
   const guides = challenge?.guides ?? [];
 
@@ -57,6 +61,19 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
 
   // Start running the sequence; clear any previous stop flag
   const runSequence = useCallback(async () => {
+    if (!token || !timestamp) return;
+    if (isTokenExpired(timestamp)) {
+      usePopupStore
+        .getState()
+        .showDialog(
+          false,
+          0,
+          "Oops!",
+          "Sesi permainan telah habis, silakan mengulang lagi.",
+          true,
+        );
+      return;
+    }
     stopRef.current = false;
     setIsRunning(true);
 
@@ -66,7 +83,14 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
     setIsPendingCommand(true);
 
     setIsRunning(false);
-  }, [setCommands, setExecuteNow, setIsPendingCommand, workspaceItems]);
+  }, [
+    setCommands,
+    setExecuteNow,
+    setIsPendingCommand,
+    workspaceItems,
+    token,
+    timestamp,
+  ]);
 
   // Called when the user clicks “Stop”
   const onStop = useCallback(() => {

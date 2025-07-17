@@ -36,6 +36,8 @@ const GameCanvas: React.FC = () => {
     Text,
   });
 
+  console.log("rendering game canvas");
+
   return (
     <div
       id="canvas-wrapper"
