@@ -24,11 +24,11 @@ export const LoginForm: React.FC = () => {
   const login = useLogin();
 
   const roomStr = room != null ? String(room) : "";
-  const defaultCode = roomStr.length === 6 ? roomStr : "";
+  const defaultRoom = roomStr.length === 6 ? roomStr : "";
   const form = useForm<loginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      code: defaultCode,
+      room: defaultRoom,
       username: "",
       password: "",
     },
@@ -37,7 +37,7 @@ export const LoginForm: React.FC = () => {
   const onSubmit = (data: loginFormData) => {
     login.mutate(
       {
-        code: data.code,
+        room: data.room,
         username: data.username,
         password: data.password,
       },
@@ -62,7 +62,7 @@ export const LoginForm: React.FC = () => {
               </div>
               <FormField
                 control={form.control}
-                name="code"
+                name="room"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Classroom Code</FormLabel>

@@ -13,7 +13,7 @@ export type AuthResponse = User & {
 };
 
 export interface LoginPayload {
-  code: string;
+  room: string;
   username: string;
   password: string;
 }

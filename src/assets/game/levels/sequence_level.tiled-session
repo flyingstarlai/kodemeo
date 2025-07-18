@@ -94,10 +94,10 @@
                 59
             ],
             "scale": 1.3434,
-            "selectedLayer": 55,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 582.8494863778473,
-                "y": 432.8569301771624
+                "x": 583.5938663093643,
+                "y": 465.23745719815395
             }
         },
         "sequence_level.json#level_placeholder": {
@@ -129,9 +129,9 @@
     "project": "sequence_level.tiled-project",
     "property.type": "int",
     "recentFiles": [
+        "sequence_level.json",
         "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/sequence_map.json",
         "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/loop_map.json",
-        "sequence_level.json",
         "../levels.json",
         "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/map_arena.json"
     ],
