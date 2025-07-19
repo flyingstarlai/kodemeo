@@ -18,8 +18,18 @@ export interface LoginPayload {
   password: string;
 }
 
+export interface RoomLoginPayload {
+  code: string;
+  username: string;
+}
+
 export interface LoginResponse {
   token: string;
+}
+
+export interface RoomLogin {
+  name: string;
+  username: string;
 }
 
 export type loginFormData = z.infer<typeof loginSchema>;

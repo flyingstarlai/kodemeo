@@ -17,6 +17,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardDashboardRouteImport } from './routes/_dashboard/dashboard'
 import { Route as DashboardAccountRouteImport } from './routes/_dashboard/account'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as AuthJoinRouteImport } from './routes/_auth/join'
 import { Route as DashboardCoursesIndexRouteImport } from './routes/_dashboard/courses/index'
 import { Route as DashboardCoursesGameRouteImport } from './routes/_dashboard/courses/_game'
 import { Route as DashboardCoursesGameCourseIndexRouteImport } from './routes/_dashboard/courses/_game/$course/index'
@@ -57,6 +58,11 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AuthRoute,
 } as any)
+const AuthJoinRoute = AuthJoinRouteImport.update({
+  id: '/join',
+  path: '/join',
+  getParentRoute: () => AuthRoute,
+} as any)
 const DashboardCoursesIndexRoute = DashboardCoursesIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -81,6 +87,7 @@ const DashboardCoursesGameCoursePlaygroundRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/join': typeof AuthJoinRoute
   '/login': typeof AuthLoginRoute
   '/account': typeof DashboardAccountRoute
   '/dashboard': typeof DashboardDashboardRoute
@@ -91,6 +98,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/join': typeof AuthJoinRoute
   '/login': typeof AuthLoginRoute
   '/account': typeof DashboardAccountRoute
   '/dashboard': typeof DashboardDashboardRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteWithChildren
   '/_dashboard': typeof DashboardRouteWithChildren
+  '/_auth/join': typeof AuthJoinRoute
   '/_auth/login': typeof AuthLoginRoute
   '/_dashboard/account': typeof DashboardAccountRoute
   '/_dashboard/dashboard': typeof DashboardDashboardRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/join'
     | '/login'
     | '/account'
     | '/dashboard'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/join'
     | '/login'
     | '/account'
     | '/dashboard'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_auth'
     | '/_dashboard'
+    | '/_auth/join'
     | '/_auth/login'
     | '/_dashboard/account'
     | '/_dashboard/dashboard'
@@ -204,6 +216,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRoute
     }
+    '/_auth/join': {
+      id: '/_auth/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof AuthJoinRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/_dashboard/courses/': {
       id: '/_dashboard/courses/'
       path: '/'
@@ -236,10 +255,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthRouteChildren {
+  AuthJoinRoute: typeof AuthJoinRoute
   AuthLoginRoute: typeof AuthLoginRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
+  AuthJoinRoute: AuthJoinRoute,
   AuthLoginRoute: AuthLoginRoute,
 }
 

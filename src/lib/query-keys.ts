@@ -6,9 +6,11 @@ import type { User } from "@/features/me/types.ts";
 
 import type { QueryClient, QueryKey } from "@tanstack/react-query";
 import type { AssignedCourse } from "@/features/dashboard/course/types.ts";
+import type { RoomLogin } from "@/features/auth/types.ts";
 
 export const queryKeys = {
   user: ["user"] as const,
+  roomLogin: ["roomLogin"] as const,
   // Student-specific
   assignedCourses: (id: string) =>
     ["classroom", id, "assignedCourses"] as const,
@@ -31,6 +33,7 @@ export const queryKeys = {
 
 export type QueryDataMap = {
   user: User;
+  roomLogin: RoomLogin[];
   assignedCourses: AssignedCourse[];
   challengeScores: ChallengeScore[];
   challengeBegin: BeginResponse;
