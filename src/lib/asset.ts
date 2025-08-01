@@ -30,18 +30,6 @@ import roadTilesPngUrl from "@/assets/game/maps/road_tiles.png?url";
 import mapObjectTilesPgnUrl from "@/assets/game/maps/map_object.png?url";
 import mapMarkerTilesPngUrl from "@/assets/game/maps/map_marker.png?url";
 
-// AUDIO
-import hoverMp3Url from "@/assets/game/sounds/flag-hover.mp3?url";
-import selectMp3Url from "@/assets/game/sounds/flag-select.mp3?url";
-import collectCoinMp3Url from "@/assets/game/sounds/collect_coin.mp3?url";
-import onGoalMp3Url from "@/assets/game/sounds/on_goal.mp3?url";
-import failedMp3Url from "@/assets/game/sounds/failed.mp3?url";
-import bgMusicMp3Url from "@/assets/game/sounds/bg_sound.mp3?url";
-import runningMp3Url from "@/assets/game/sounds/running_in_grass.mp3?url";
-import tickMp3Url from "@/assets/game/sounds/tick.mp3?url";
-import rejectedMp3Url from "@/assets/game/sounds/rejected.mp3?url";
-import destroyMp3Url from "@/assets/game/sounds/destroy.mp3?url";
-
 export const spriteBundles = {
   levels: {
     bgArenaJson: mapArenaJsonUrl,
@@ -71,18 +59,6 @@ export const spriteBundles = {
   },
   chest: {
     chestClosed: chestClosedPngUrl,
-  },
-  audio: {
-    onHover: hoverMp3Url,
-    onSelect: selectMp3Url,
-    collectCoin: collectCoinMp3Url,
-    onGoal: onGoalMp3Url,
-    onFailed: failedMp3Url,
-    bgMusic: bgMusicMp3Url,
-    onMoving: runningMp3Url,
-    onDrop: tickMp3Url,
-    onRejected: rejectedMp3Url,
-    onDestroy: destroyMp3Url,
   },
 } as const;
 

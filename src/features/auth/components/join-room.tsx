@@ -7,11 +7,11 @@ import type { AxiosError } from "axios";
 import { useLoginRoom } from "@/features/auth/hooks/use-login-room.ts";
 
 const CARD_COLORS = [
-  "bg-pink-100",
-  "bg-blue-100",
-  "bg-yellow-100",
-  "bg-green-100",
-  "bg-purple-100",
+  "bg-pink-100 dark:bg-pink-900",
+  "bg-blue-100 dark:bg-blue-900",
+  "bg-yellow-100 dark:bg-yellow-900",
+  "bg-green-100 dark:bg-green-900",
+  "bg-purple-100 dark:bg-purple-900",
 ];
 
 export const JoinRoom: React.FC = () => {
@@ -25,7 +25,7 @@ export const JoinRoom: React.FC = () => {
     if (!code) return;
     setUsername(username);
     loginMutation.mutate(
-      { code, username },
+      { code: code.toString(), username },
       {
         onSuccess: async ({ token }) => {
           if (!token) return;
