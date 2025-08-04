@@ -90,19 +90,19 @@
         },
         "sequence_level.json": {
             "expandedGroupLayers": [
-                29,
+                149,
                 59
             ],
-            "scale": 1.3434,
-            "selectedLayer": 0,
+            "scale": 0.8616,
+            "selectedLayer": 121,
             "viewCenter": {
-                "x": 583.5938663093643,
-                "y": 465.23745719815395
+                "x": 660.3992571959144,
+                "y": 511.25812441968435
             }
         },
         "sequence_level.json#level_placeholder": {
             "dynamicWrapping": false,
-            "scaleInDock": 1
+            "scaleInDock": 0.6687
         },
         "sequence_level.json#map_arena": {
             "dynamicWrapping": false,
@@ -127,7 +127,7 @@
         "sequence_level.json"
     ],
     "project": "sequence_level.tiled-project",
-    "property.type": "int",
+    "property.type": "string",
     "recentFiles": [
         "sequence_level.json",
         "/Volumes/STARLAI/Developments/React/junior-coder-student/src/assets/game/maps/sequence_map.json",

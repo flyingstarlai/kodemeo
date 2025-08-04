@@ -37,7 +37,7 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
     insertionIndex,
   } = useDragDropStore();
 
-  const { setCoins } = useCollectibleStore();
+  const setCoins = useCollectibleStore((s) => s.setCoins);
   const resetUIState = useUIStore((s) => s.resetUIState);
   const triggerCleanup = useCycleStore((s) => s.triggerCleanup);
 
@@ -46,7 +46,9 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
 
   const { token, timestamp } = useChallengeTokenStore();
   const challenge = useLevelStore((s) => s.currentLevel);
+  const showAnswer = useLevelStore((s) => s.showAnswer);
   const guides = challenge?.guides ?? [];
+  const answer = challenge?.answer ?? [];
 
   // State to track whether a sequence is in progress
   const [isRunning, setIsRunning] = useState(false);
@@ -101,12 +103,19 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
     setIsRunning(false);
   }, [resetUIState, setCoins, triggerCleanup]);
 
-  const guideItems: IWorkspaceItem[] = guides.map((cmd, idx) => ({
-    command: cmd,
-    id: `hint_${idx + 1}`, // hint_1, hint_2, …
-    parent: null,
-    variant: "direction" as Variant, // or whatever variant you use for those icons
-  }));
+  const guideItems: IWorkspaceItem[] = showAnswer
+    ? answer.map((cmd, idx) => ({
+        command: cmd,
+        id: `hint_${idx + 1}`, // hint_1, hint_2, …
+        parent: null,
+        variant: "direction" as Variant, // or whatever variant you use for those icons
+      }))
+    : guides.map((cmd, idx) => ({
+        command: cmd,
+        id: `hint_${idx + 1}`, // hint_1, hint_2, …
+        parent: null,
+        variant: "direction" as Variant, // or whatever variant you use for those icons
+      }));
 
   // Renders each item with a highlight if it is currently running
   const renderItem = (item: IWorkspaceItem, idx: number): ReactNode => {

@@ -132,8 +132,9 @@ export class CommandSystem extends System {
     }
 
     const [nextCmd, ...rest] = queue.commands;
-    useUIStore.getState().setCurrentCommand(nextCmd);
     queue.commands = rest;
+
+    useUIStore.getState().setCurrentCommand(nextCmd);
 
     const delta = DIRECTION_DELTAS[nextCmd.command];
     const destCol = gridPos.col + delta[0];

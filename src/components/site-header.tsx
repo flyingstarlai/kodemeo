@@ -19,6 +19,8 @@ import {
 import { useGetChallenges } from "@/features/dashboard/challenge/hooks/use-get-challenges.ts";
 import type { ChallengeResponse } from "@/features/dashboard/challenge/types.ts";
 import { SoundToggle } from "@/components/sound-toggle.tsx";
+import { AnswerToggle } from "@/components/answer-toggle.tsx";
+import { useGetMe } from "@/features/me/hooks/use-get-me.ts";
 
 const SEGMENT_ALIAS: Record<string, string> = {
   account: "Akun",
@@ -36,6 +38,7 @@ export function SiteHeader() {
     strict: false,
   });
   const { level: challengeId } = useSearch({ strict: false });
+  const { data } = useGetMe();
 
   const { data: challenges } = useGetChallenges(courseSlug);
 
@@ -101,6 +104,7 @@ export function SiteHeader() {
         </Breadcrumb>
 
         <div className="ml-auto flex items-center gap-2">
+          {data?.email.split("@")[0] === "teacher" && <AnswerToggle />}
           {location.pathname.includes("playground") && <SoundToggle />}
           <ModeToggle />
         </div>

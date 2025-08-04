@@ -23,6 +23,7 @@ export const defaultLevel: LevelData = {
   maxStep: 0,
   commands: [],
   guides: [],
+  answer: [],
 };
 
 export const DIRECTION_DELTAS: Record<string, [number, number]> = {

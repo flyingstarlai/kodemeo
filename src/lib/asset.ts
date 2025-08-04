@@ -6,6 +6,9 @@ import catSheetPngUrl from "@/assets/game/cat_sheet.png?url";
 import coinAtlasJsonUrl from "@/assets/game/coin_atlas.json?url";
 import coinSheetPngUrl from "@/assets/game/coin_sheet.png?url";
 
+import enemyMouseAtlasJsonUrl from "@/assets/game/enemy_mouse.json?url";
+import enemyMousePngUrl from "@/assets/game/enemy_mouse.png?url";
+
 import mapArenaJsonUrl from "@/assets/game/map_arena.json?url";
 import mapArenaPngUrl from "@/assets/game/map_arena.png?url";
 import levelsJsonUrl from "@/assets/game/levels.json?url";
@@ -70,6 +73,10 @@ export const atlasBundles = {
   cat: {
     catAtlas: catAtlasJsonUrl,
     catSheet: catSheetPngUrl,
+  },
+  mouse: {
+    mouseAtlas: enemyMouseAtlasJsonUrl,
+    mouseSheet: enemyMousePngUrl,
   },
 };
 

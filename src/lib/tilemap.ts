@@ -241,11 +241,21 @@ export function extractLevelDataFromMap(group: GroupLayer): LevelData {
     maxStep: getProperty<number>("maxStep") ?? 10,
     commands:
       (getProperty<string>("commands")
+        ?.trim()
         ?.split(",")
+        .filter(Boolean)
         .map((cmd) => cmd.trim()) as LevelData["commands"]) ?? [],
     guides:
       (getProperty<string>("guides")
+        ?.trim()
         ?.split(",")
+        .filter(Boolean)
         .map((cmd) => cmd.trim()) as LevelData["guides"]) ?? [],
+    answer:
+      (getProperty<string>("answer")
+        ?.trim()
+        ?.split(",")
+        .filter(Boolean)
+        .map((cmd) => cmd.trim()) as LevelData["answer"]) ?? [],
   };
 }

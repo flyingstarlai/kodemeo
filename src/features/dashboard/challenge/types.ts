@@ -48,4 +48,5 @@ export interface LevelData {
   maxStep: number;
   commands: Array<CommandType | "loop">;
   guides: Array<CommandType>;
+  answer: Array<CommandType>;
 }

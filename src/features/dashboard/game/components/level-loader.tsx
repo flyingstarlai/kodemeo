@@ -47,6 +47,8 @@ export const LevelLoader: React.FC = () => {
     if (!levelGroup) return;
     const levelData = extractLevelDataFromMap(levelGroup);
 
+    console.log("levelData", levelData.guides);
+
     setCurrentLevel(levelData);
     setMaxCoins(levelData.collectible.length);
   }, [

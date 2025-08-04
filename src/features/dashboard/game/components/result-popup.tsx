@@ -128,7 +128,7 @@ export const ResultPopup = () => {
               </Button>
             )}
 
-            {onGoal && (
+            {onGoal && nextChallengeId && (
               <Button
                 variant="default"
                 onClick={handleContinue}
