@@ -22,8 +22,8 @@ export class MovementSystem extends System {
   private readonly players = this.query(
     (q) =>
       q.current
-        .with(PlayerTag, Position, GridMovement, SpriteAnimation, GridPosition)
-        .write.and.using(Queue).write,
+        .with(PlayerTag, Position, SpriteAnimation, GridPosition)
+        .write.and.using(Queue, GridMovement).write,
   );
 
   private readonly managers = this.query(
@@ -35,7 +35,11 @@ export class MovementSystem extends System {
 
     if (!player || !manager) return;
 
+    if (!player.has(GridMovement)) return;
+
     const gridMovement = player.write(GridMovement);
+
+    if (!gridMovement) return;
 
     if (
       gridMovement.startCol === gridMovement.destCol &&
@@ -83,6 +87,9 @@ export class MovementSystem extends System {
       // Snap movement state
       gridMovement.startCol = gridMovement.destCol;
       gridMovement.startRow = gridMovement.destRow;
+
+      // Remove movement
+      player.remove(GridMovement);
 
       // const queue = player.read(Queue);
       const levelProgress = manager.write(LevelProgress);

@@ -4,7 +4,6 @@ import {
   LevelProgress,
   Position,
   GridPosition,
-  GridMovement,
   SpriteAnimation,
   Rotation,
   Facing,
@@ -17,13 +16,13 @@ import {
   Transition,
 } from "../components";
 import { useLevelStore } from "@/features/dashboard/game/store/use-level-store.ts";
-import { GameConstants } from "@/features/dashboard/game/constans.ts";
 import { spawnerGroup } from "./system-group.ts";
 import type { LevelData } from "@/features/dashboard/challenge/types.ts";
 import { sysLogger } from "@/lib/logger.ts";
 import { getCenteredTilePosition } from "@/lib/tiles.ts";
 import { getRotationFromFacing } from "@/lib/rotation.ts";
 import { useUIStore } from "@/features/dashboard/game/store/use-ui-store.ts";
+import { EnemyTag } from "@/ecs/components/tags/enemy-tag.ts";
 
 @system(spawnerGroup)
 export class SpawnerSystem extends System {
@@ -59,6 +58,7 @@ export class SpawnerSystem extends System {
     this.spawnTreasure(level);
     this.spawnPlayer(level);
     this.spawnCoins(level);
+    this.spawnObstacle(level);
   }
 
   spawnCoins(level: LevelData) {
@@ -78,6 +78,23 @@ export class SpawnerSystem extends System {
     }
   }
 
+  spawnObstacle(level: LevelData) {
+    const obstacles = level.obstacle;
+
+    for (const obstacle of obstacles) {
+      const { x, y } = getCenteredTilePosition(obstacle.col, obstacle.row);
+      this.createEntity(
+        Position,
+        { x, y },
+        GridPosition,
+        { col: obstacle.col, row: obstacle.row },
+        SpriteAnimation,
+        { name: "idle", isLooped: true, frames: 17, isPlaying: false },
+        EnemyTag,
+      );
+    }
+  }
+
   spawnPlayer(level: LevelData) {
     const [spawn] = level.start;
     const { x, y } = getCenteredTilePosition(spawn.col, spawn.row);
@@ -87,17 +104,8 @@ export class SpawnerSystem extends System {
       { x, y },
       GridPosition,
       { col: spawn.col, row: spawn.row },
-      GridMovement,
-      {
-        startCol: spawn.col,
-        startRow: spawn.row,
-        destCol: spawn.col,
-        destRow: spawn.row,
-        progress: 1,
-        duration: GameConstants.DURATION,
-      },
       SpriteAnimation,
-      { name: "idle", frames: 20, isPlaying: false },
+      { name: "idle", isLooped: true, frames: 20, isPlaying: false },
       Rotation,
       { angle },
       Facing,

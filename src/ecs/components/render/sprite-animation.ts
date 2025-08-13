@@ -6,4 +6,5 @@ export class SpriteAnimation {
   declare name: "idle" | "walk" | "scratch" | "whacked" | "rotate";
   @field.float32 declare frames: number;
   @field.boolean declare isPlaying: boolean;
+  @field.boolean declare isLooped: boolean;
 }

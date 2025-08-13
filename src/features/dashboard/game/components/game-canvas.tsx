@@ -19,6 +19,7 @@ import {
 } from "@/features/dashboard/game/components/world-scrollable-container.tsx";
 import { CommandSheetContainer } from "@/features/dashboard/command/components/command-sheet-container.tsx";
 import { ScrollCenterButton } from "@/features/dashboard/game/components/scroll-center-button.tsx";
+import { MouseAnimatedSprite } from "@/features/dashboard/game/renders/mouse-animated-sprite.tsx";
 
 const GameCanvas: React.FC = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -67,6 +68,7 @@ const GameCanvas: React.FC = () => {
           <BackgroundSprite />
           <LevelSprite />
           <CollectibleAnimatedSprite />
+          <MouseAnimatedSprite />
           <TreasureSprite />
           <PlayerAnimatedSprite />
         </WorldScrollableContainer>

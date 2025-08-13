@@ -9,7 +9,7 @@ import {
 } from "react";
 import { useTick } from "@pixi/react";
 import type { FederatedPointerEvent } from "pixi.js";
-import { usePlayerStore } from "@/features/dashboard/game/store/use-player-store.ts";
+import { usePlayerSpriteStore } from "@/features/dashboard/game/store/use-player-sprite-store.ts";
 import { useUIStore } from "@/features/dashboard/game/store/use-ui-store.ts";
 import { getPlayerGlobalPosition } from "@/lib/position.ts";
 import { useCommandSheetStore } from "@/features/dashboard/command/store/use-command-sheet-store.ts";
@@ -40,7 +40,7 @@ export const WorldScrollableContainer = forwardRef<
     const targetPos = useRef({ x: 0, y: 0 });
     const dragStart = useRef<{ x: number; y: number } | null>(null);
     const isSheetOpen = useCommandSheetStore((s) => s.isOpen);
-    const [spriteData] = usePlayerStore((s) => s.sprites);
+    const [spriteData] = usePlayerSpriteStore((s) => s.sprites);
     const pendingCommand = useUIStore((s) => s.isPendingCommand);
 
     const scrollTarget = useUIStore((s) => s.scrollTarget);

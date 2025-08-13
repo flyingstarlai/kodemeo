@@ -4,6 +4,7 @@ import { cleanupGroup } from "./system-group.ts";
 import { useCycleStore } from "@/features/dashboard/game/store/use-cycle-store.ts";
 import {
   CollectibleTag,
+  EnemyTag,
   GoalTag,
   MarkAsDeletedTag,
   PlayerTag,
@@ -15,7 +16,8 @@ export class CleanupSystem extends System {
     (q) =>
       q.current
         .without(MarkAsDeletedTag)
-        .and.withAny(PlayerTag, CollectibleTag, GoalTag).usingAll.write,
+        .and.withAny(PlayerTag, CollectibleTag, GoalTag, EnemyTag).usingAll
+        .write,
   );
   execute(): void {
     const shouldCleanup = useCycleStore.getState().shouldCleanup;

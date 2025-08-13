@@ -9,8 +9,9 @@ import {
 import { logicGroup } from "./system-group.ts";
 import { useCollectibleStore } from "@/features/dashboard/game/store/use-collectible-store.ts";
 import { playSound } from "@/lib/sounds.ts";
+import { AttackSystem } from "@/ecs/systems/attack-system.ts";
 
-@system(logicGroup)
+@system(logicGroup, (s) => s.after(AttackSystem))
 export class CollectSystem extends System {
   // query player
   private readonly players = this.query(

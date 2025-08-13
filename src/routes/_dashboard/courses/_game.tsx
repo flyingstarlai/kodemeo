@@ -25,7 +25,7 @@ function RouteComponent() {
     };
 
     loadAssets().finally(() => {
-      if (window.innerWidth < 1300) {
+      if (window.innerWidth < 2048) {
         sidebar.setOpen(false);
       }
     });

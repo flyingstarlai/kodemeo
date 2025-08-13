@@ -5,6 +5,7 @@ import type { BundleTextures } from "@/lib/asset.ts";
 export interface AssetContextType {
   // parsed atlas → Spritesheet
   cat: Spritesheet;
+  mouse: Spritesheet;
   coin: Spritesheet;
   levels: BundleTextures<"levels">;
   maps: BundleTextures<"maps">;

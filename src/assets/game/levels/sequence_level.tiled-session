@@ -90,14 +90,16 @@
         },
         "sequence_level.json": {
             "expandedGroupLayers": [
-                149,
-                59
+                191,
+                59,
+                179,
+                185
             ],
             "scale": 0.8616,
-            "selectedLayer": 121,
+            "selectedLayer": 163,
             "viewCenter": {
-                "x": 660.3992571959144,
-                "y": 511.25812441968435
+                "x": 627.9015784586815,
+                "y": 601.2070566388115
             }
         },
         "sequence_level.json#level_placeholder": {

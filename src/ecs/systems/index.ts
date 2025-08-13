@@ -6,10 +6,12 @@ export { CollectSystem } from "./collect-system.ts";
 export { PlayerRenderSystem } from "./player-render-system.ts";
 export { CollectibleRenderSystem } from "./collectible-render-system.ts";
 export { TreasureRenderSystem } from "./treasure-render-system.ts";
+export { MouseRenderSystem } from "./mouse-render-system.ts";
 export { DeleterSystem } from "./deleter-system.ts";
 export { SpawnerSystem } from "./spawner-system.ts";
 export { CleanupSystem } from "./cleanup-system.ts";
 export { TransitionSystem } from "./transition-system.ts";
+export { AttackSystem } from "./attack-system.ts";
 
 // === Grouping ===
 import {

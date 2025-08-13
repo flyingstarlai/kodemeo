@@ -17,6 +17,8 @@ export { Queue } from "./logic/queue.ts";
 export { Tile, TileKindEnum } from "./logic/tile.ts";
 export { Bag } from "./logic/bag.ts";
 export { Score } from "./logic/score.ts";
+export { Attacking } from "./logic/attacking.ts";
+export { MarkAsDestroyed } from "./logic/mark-as-destroyed.ts";
 
 // Tags
 export { PlayerTag } from "./tags/player-tag.ts";
@@ -24,6 +26,7 @@ export { CollectibleTag } from "./tags/collectible-tag.ts";
 export { GoalTag } from "./tags/goal-tag.ts";
 export { ManagerTag } from "./tags/manager-tag.ts";
 export { MarkAsDeletedTag } from "./tags/mark-as-deleted-tag.ts";
+export { EnemyTag } from "./tags/enemy-tag.ts";
 
 // Session
 export { LevelProgress } from "./session/level-progress.ts";

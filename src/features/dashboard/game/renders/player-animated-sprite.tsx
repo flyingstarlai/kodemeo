@@ -1,11 +1,12 @@
 import { useAssets } from "@/providers/asset-context.ts";
 import React, { useEffect, useRef } from "react";
 import type { AnimatedSprite } from "pixi.js";
-import { usePlayerStore } from "@/features/dashboard/game/store/use-player-store.ts";
+import { usePlayerSpriteStore } from "@/features/dashboard/game/store/use-player-sprite-store.ts";
 
 export const PlayerAnimatedSprite: React.FC = () => {
   const { cat } = useAssets();
-  const [spriteData] = usePlayerStore((s) => s.sprites);
+  const [spriteData] = usePlayerSpriteStore((s) => s.sprites);
+  const toggleComplete = usePlayerSpriteStore((s) => s.toggleComplete);
 
   const spriteRef = useRef<AnimatedSprite>(null);
 
@@ -13,9 +14,16 @@ export const PlayerAnimatedSprite: React.FC = () => {
     const sprite = spriteRef.current;
     if (!sprite) return;
     if (!sprite.playing) {
+      console.log("playing sprite data");
+      sprite.onComplete = () => {
+        // sprite.gotoAndStop(4);
+        console.log("completed sprite data");
+        if (spriteData.animationName === "scratch") toggleComplete();
+      };
+
       sprite.play();
     }
-  }, [spriteData]);
+  }, [spriteData, toggleComplete]);
 
   if (!spriteData) return null;
 
@@ -29,7 +37,7 @@ export const PlayerAnimatedSprite: React.FC = () => {
       ref={spriteRef}
       anchor={0.5}
       textures={cat.animations[spriteData.animationName]}
-      loop={true}
+      loop={spriteData.isLooped}
       autoPlay={true}
       roundPixels={true}
     />
