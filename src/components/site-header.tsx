@@ -55,12 +55,15 @@ export function SiteHeader() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
 
+  const pageSize = 12;
+  const currentLevel = challenge?.level ?? 1; // fallback to 1 if undefined
+  const currentPage = Math.ceil(currentLevel / pageSize);
+
   // Build breadcrumbs array
   const crumbs = segments
     .filter((seg) => seg !== "r")
     .map((segment, index) => {
       const href = "/" + segments.slice(0, index + 1).join("/");
-
       // If segment matches assignmentId, show level
       if (segment === "playground") {
         return {
@@ -69,7 +72,13 @@ export function SiteHeader() {
         };
       }
 
-      return { href, label: formatLabel(segment) };
+      return {
+        href,
+        search: ["sequence", "loop"].includes(segment)
+          ? { page: currentPage }
+          : undefined,
+        label: formatLabel(segment),
+      };
     });
 
   return (
@@ -92,7 +101,13 @@ export function SiteHeader() {
                       <BreadcrumbPage>{crumb.label}</BreadcrumbPage>
                     ) : (
                       <BreadcrumbLink asChild>
-                        <Link to={crumb.href}>{crumb.label}</Link>
+                        {crumb.search ? (
+                          <Link to={crumb.href} search={crumb.search}>
+                            {crumb.label}
+                          </Link>
+                        ) : (
+                          <Link to={crumb.href}>{crumb.label}</Link>
+                        )}
                       </BreadcrumbLink>
                     )}
                   </BreadcrumbItem>
