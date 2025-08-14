@@ -19,7 +19,7 @@ export const PalettePanel = forwardRef<HTMLDivElement>((_, ref) => {
       ref={ref}
       data-dropzone="palette"
       className={clsx(
-        "p-2 border rounded flex flex-wrap gap-2 transition-colors duration-200 dark:bg-zinc-800",
+        "py-2 px-4 border rounded flex flex-wrap gap-8 transition-colors duration-200 dark:bg-zinc-800",
         isOverDeleteZone && "bg-red-200/20 border-red-200/20",
       )}
     >
