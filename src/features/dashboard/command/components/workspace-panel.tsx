@@ -191,7 +191,7 @@ export const WorkspacePanel = () => {
 
   const renderGuideItem = (): ReactNode => {
     return (
-      <div className="absolute inset-0 flex flex-nowrap items-center gap-2 pointer-events-none opacity-35">
+      <div className="absolute inset-0 flex flex-nowrap items-center gap-2 pointer-events-none opacity-35 px-2">
         {guideItems.map((item) => (
           <div key={item.id} data-workspace-item={true}>
             {item.command === "loop" ? (
@@ -214,7 +214,7 @@ export const WorkspacePanel = () => {
       {/* Left Scroll Button */}
       <button
         onClick={scrollLeft}
-        className="px-2 py-1 bg-gray-200 dark:bg-zinc-700 rounded hover:bg-gray-300 dark:hover:bg-zinc-600 z-20"
+        className="p-2 bg-gray-200 dark:bg-zinc-700 rounded hover:bg-gray-300 dark:hover:bg-zinc-600 z-20"
       >
         <ChevronLeftIcon className="w-8 h-8" />
       </button>
@@ -223,7 +223,7 @@ export const WorkspacePanel = () => {
       <div
         ref={scrollContainerRef}
         data-dropzone="workspace"
-        className="flex w-full flex-nowrap gap-2 xl:min-h-[108px] min-h-[90px] overflow-x-auto scrollbar-hide relative"
+        className="flex w-full flex-nowrap gap-2 xl:min-h-[108px] min-h-[90px] overflow-x-auto scrollbar-hide relative px-2"
       >
         {/* Guide items go first so they align */}
         {renderGuideItem()}
@@ -240,7 +240,7 @@ export const WorkspacePanel = () => {
       {/* Right Scroll Button */}
       <button
         onClick={scrollRight}
-        className="px-2 py-1 bg-gray-200 dark:bg-zinc-700 rounded hover:bg-gray-300 dark:hover:bg-zinc-600 z-20"
+        className="p-2 bg-gray-200 dark:bg-zinc-700 rounded hover:bg-gray-300 dark:hover:bg-zinc-600 z-20"
       >
         <ChevronRightIcon className="w-8 h-8" />
       </button>
