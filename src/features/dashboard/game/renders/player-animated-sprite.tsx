@@ -2,6 +2,7 @@ import { useAssets } from "@/providers/asset-context.ts";
 import React, { useEffect, useRef } from "react";
 import type { AnimatedSprite } from "pixi.js";
 import { usePlayerSpriteStore } from "@/features/dashboard/game/store/use-player-sprite-store.ts";
+import { playSound } from "@/lib/sounds.ts";
 
 export const PlayerAnimatedSprite: React.FC = () => {
   const { cat } = useAssets();
@@ -15,10 +16,17 @@ export const PlayerAnimatedSprite: React.FC = () => {
     if (!sprite) return;
     if (!sprite.playing) {
       console.log("playing sprite data");
+      sprite.onFrameChange = (frame) => {
+        if (spriteData.animationName === "scratch" && frame === 4) {
+          playSound("onScratch", { volume: 0.5 });
+        }
+      };
       sprite.onComplete = () => {
-        // sprite.gotoAndStop(4);
         console.log("completed sprite data");
-        if (spriteData.animationName === "scratch") toggleComplete();
+        if (spriteData.animationName === "scratch") {
+          sprite.stop();
+          toggleComplete();
+        }
       };
 
       sprite.play();

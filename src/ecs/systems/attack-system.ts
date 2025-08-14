@@ -30,6 +30,8 @@ export class AttackSystem extends System {
     const [player] = this.players.current;
     if (!player) return;
 
+    console.log("Attacking");
+
     if (!playerStore.completed) return;
 
     playerStore.toggleComplete();
@@ -42,6 +44,12 @@ export class AttackSystem extends System {
         enemy.add(MarkAsDeletedTag);
       }
     }
+
+    const anim = player.write(SpriteAnimation);
+    anim.name = "idle";
+    anim.name = "idle";
+    anim.isLooped = true;
+    anim.frames = 20;
 
     player.remove(Attacking);
   }

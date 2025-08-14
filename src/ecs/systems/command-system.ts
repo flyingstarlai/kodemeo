@@ -103,7 +103,7 @@ export class CommandSystem extends System {
     ];
 
     const attacking: Attacking = {
-      isAttacking: true,
+      hasTarget: false,
       targetCol: grid.col,
       targetRow: grid.row,
     };
@@ -115,6 +115,7 @@ export class CommandSystem extends System {
       });
 
       if (isObstacle) {
+        attacking.hasTarget = true;
         attacking.targetCol = n.col;
         attacking.targetRow = n.row;
         break;

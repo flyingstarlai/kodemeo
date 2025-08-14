@@ -5,8 +5,9 @@ import {
   SpriteAnimation,
   Facing,
   Rotation,
+  Attacking,
+  GridPosition,
 } from "../components";
-
 import { PlayerTag } from "@/ecs/components";
 import {
   type SpriteData,
@@ -20,8 +21,8 @@ export class PlayerRenderSystem extends System {
   private readonly players = this.query(
     (q) =>
       q.current
-        .with(PlayerTag, Position, Facing, SpriteAnimation)
-        .and.using(GridMovement)
+        .with(PlayerTag, GridPosition, Position, Facing, SpriteAnimation)
+        .and.using(GridMovement, Attacking)
         .read.and.with(Rotation).write,
   );
 
@@ -37,29 +38,29 @@ export class PlayerRenderSystem extends System {
 
       let nextRotation = rotation.angle;
 
+      // Rotate towards movement target
       if (player.has(GridMovement)) {
-        const movement = player.read(GridMovement);
-
-        if (
-          movement.destCol !== movement.startCol ||
-          movement.destRow !== movement.startRow
-        ) {
-          const targetRotation = getRotationFromTarget(
-            movement.startCol,
-            movement.startRow,
-            movement.destCol,
-            movement.destRow,
+        const { startCol, startRow, destCol, destRow } =
+          player.read(GridMovement);
+        if (destCol !== startCol || destRow !== startRow) {
+          nextRotation = this.rotateTowards(
+            rotation.angle,
+            getRotationFromTarget(startCol, startRow, destCol, destRow),
           );
+          rotation.angle = nextRotation;
+        }
+      }
 
-          let diff = targetRotation - rotation.angle;
-          if (diff > Math.PI) diff -= 2 * Math.PI;
-          else if (diff < -Math.PI) diff += 2 * Math.PI;
-          const maxDelta = 2 * Math.PI * this.delta;
-          nextRotation =
-            Math.abs(diff) <= maxDelta
-              ? targetRotation
-              : rotation.angle + Math.sign(diff) * maxDelta;
+      // Rotate towards attack target
+      if (player.has(Attacking)) {
+        const grid = player.read(GridPosition);
+        const { targetCol, targetRow, hasTarget } = player.read(Attacking);
 
+        if (hasTarget) {
+          nextRotation = this.rotateTowards(
+            rotation.angle,
+            getRotationFromTarget(grid.col, grid.row, targetCol, targetRow),
+          );
           rotation.angle = nextRotation;
         }
       }
@@ -81,23 +82,38 @@ export class PlayerRenderSystem extends System {
     }
   }
 
+  /**
+   * Smoothly rotate from currentAngle towards targetAngle
+   */
+  private rotateTowards(currentAngle: number, targetAngle: number): number {
+    let diff = targetAngle - currentAngle;
+    if (diff > Math.PI) diff -= 2 * Math.PI;
+    else if (diff < -Math.PI) diff += 2 * Math.PI;
+
+    const maxDelta = 2 * Math.PI * this.delta;
+    return Math.abs(diff) <= maxDelta
+      ? targetAngle
+      : currentAngle + Math.sign(diff) * maxDelta;
+  }
+
+  /**
+   * Compare two sprite arrays for equality
+   */
   private areSpritesEqual(a: SpriteData[], b: SpriteData[]): boolean {
-    if (a.length !== b.length) return false;
-    for (let i = 0; i < a.length; i++) {
-      const s1 = a[i];
-      const s2 = b[i];
-      if (
-        s1.id !== s2.id ||
-        s1.x !== s2.x ||
-        s1.y !== s2.y ||
-        s1.rotation !== s2.rotation ||
-        s1.animationName !== s2.animationName ||
-        s1.animationSpeed !== s2.animationSpeed ||
-        s1.isLooped !== s2.isLooped
-      ) {
-        return false;
-      }
-    }
-    return true;
+    return (
+      a.length === b.length &&
+      a.every((s1, i) => {
+        const s2 = b[i];
+        return (
+          s1.id === s2.id &&
+          s1.x === s2.x &&
+          s1.y === s2.y &&
+          s1.rotation === s2.rotation &&
+          s1.animationName === s2.animationName &&
+          s1.animationSpeed === s2.animationSpeed &&
+          s1.isLooped === s2.isLooped
+        );
+      })
+    );
   }
 }

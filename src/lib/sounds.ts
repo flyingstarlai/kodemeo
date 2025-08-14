@@ -3,6 +3,7 @@ import { Howl } from "howler";
 import hoverMp3Url from "@/assets/game/sounds/flag-hover.mp3?url";
 import selectMp3Url from "@/assets/game/sounds/flag-select.mp3?url";
 import collectCoinMp3Url from "@/assets/game/sounds/collect_coin.mp3?url";
+import onScratchMp3Url from "@/assets/game/sounds/on_scratch.mp3?url";
 import onGoalMp3Url from "@/assets/game/sounds/on_goal.mp3?url";
 import failedMp3Url from "@/assets/game/sounds/failed.mp3?url";
 import bgMusicMp3Url from "@/assets/game/sounds/bg_sound.mp3?url";
@@ -15,6 +16,7 @@ type SoundKey =
   | "hover"
   | "select"
   | "collectCoin"
+  | "onScratch"
   | "onGoal"
   | "onFailed"
   | "bgMusic"
@@ -33,6 +35,7 @@ const soundSources: Record<SoundKey, string> = {
   hover: hoverMp3Url,
   select: selectMp3Url,
   collectCoin: collectCoinMp3Url,
+  onScratch: onScratchMp3Url,
   onGoal: onGoalMp3Url,
   onFailed: failedMp3Url,
   bgMusic: bgMusicMp3Url,

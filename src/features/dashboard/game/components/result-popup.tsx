@@ -82,7 +82,7 @@ export const ResultPopup = () => {
 
     closeDialog();
 
-    const challengePerPage = 6;
+    const challengePerPage = 12;
     const page = Math.ceil(currentChallenge.level / challengePerPage);
     await navigate({
       to: "/courses/$course",
