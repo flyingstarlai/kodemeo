@@ -1,5 +1,5 @@
 import { useDragDropStore } from "@/stores/use-drag-drop-store";
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import type { ILoopCommand, IWorkspaceItem } from "../types";
 import {
   findLoopWithChild,
@@ -12,9 +12,6 @@ import { playSound } from "@/lib/sounds.ts";
 import { useLevelStore } from "@/features/dashboard/game/store/use-level-store.ts";
 
 export const CommandContainer: React.FC = () => {
-  const panelRef = useRef<HTMLDivElement>(null);
-  const paletteRef = useRef<HTMLDivElement>(null);
-
   const currentLevel = useLevelStore((s) => s.currentLevel);
 
   const {
@@ -346,8 +343,8 @@ export const CommandContainer: React.FC = () => {
 
   return (
     <div className="relative flex flex-col gap-y-2 touch-none xl:h-[230px] h-[190px]">
-      <WorkspacePanel ref={panelRef} />
-      <PalettePanel ref={paletteRef} />
+      <WorkspacePanel />
+      <PalettePanel />
       <DragPreview />
     </div>
   );

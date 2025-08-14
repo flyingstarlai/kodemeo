@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useState,
-  useCallback,
-  useRef,
-  type ReactNode,
-} from "react";
+import React, { useState, useCallback, useRef, type ReactNode } from "react";
 import type {
   IWorkspaceItem,
   ILoopCommand,
@@ -26,8 +20,10 @@ import { flattenWorkspaceItems } from "@/features/dashboard/command/utils/flatte
 import { useChallengeTokenStore } from "@/features/dashboard/game/store/use-challenge-token-store.ts";
 import { isTokenExpired } from "@/lib/expired.ts";
 import { usePopupStore } from "@/features/dashboard/game/store/use-popup-store.ts";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { MAX_STEPS } from "@/features/dashboard/game/constans.ts";
 
-export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
+export const WorkspacePanel = () => {
   const {
     draggingItem,
     setDraggingItem,
@@ -55,6 +51,16 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
 
   // Mutable ref to signal when a stop is requested
   const stopRef = useRef(false);
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = useCallback(() => {
+    scrollContainerRef.current?.scrollBy({ left: -150, behavior: "smooth" });
+  }, []);
+
+  const scrollRight = useCallback(() => {
+    scrollContainerRef.current?.scrollBy({ left: 150, behavior: "smooth" });
+  }, []);
 
   // Filter out the item currently being dragged
   const visibleItems: IWorkspaceItem[] = draggingItem
@@ -103,7 +109,7 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
     setIsRunning(false);
   }, [resetUIState, setCoins, triggerCleanup]);
 
-  const guideItems: IWorkspaceItem[] = showAnswer
+  let guideItems: IWorkspaceItem[] = showAnswer
     ? answer.map((cmd, idx) => ({
         command: cmd,
         id: `hint_${idx + 1}`, // hint_1, hint_2, …
@@ -117,6 +123,14 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
         variant: "direction" as Variant, // or whatever variant you use for those icons
       }));
 
+  if (guideItems.length === 0) {
+    guideItems = Array.from({ length: MAX_STEPS }, (_, idx) => ({
+      command: "blank",
+      id: `hint_blank_${idx + 1}`,
+      parent: null,
+      variant: "direction" as Variant,
+    }));
+  }
   // Renders each item with a highlight if it is currently running
   const renderItem = (item: IWorkspaceItem, idx: number): ReactNode => {
     const isRunningThisItem =
@@ -177,7 +191,7 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
 
   const renderGuideItem = (): ReactNode => {
     return (
-      <div className="absolute inset-0 flex flex-items justify-start items-center px-2  gap-2 pointer-events-none">
+      <div className="absolute inset-0 flex flex-nowrap items-center gap-2 pointer-events-none opacity-35">
         {guideItems.map((item) => (
           <div key={item.id} data-workspace-item={true}>
             {item.command === "loop" ? (
@@ -187,26 +201,35 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
                 runningCommand={currentCommand}
               />
             ) : (
-              <div className={clsx("transition-all duration-200 opacity-35")}>
-                <BaseCommand item={item} type="workspace" />
-              </div>
+              <BaseCommand item={item} type="workspace" />
             )}
           </div>
         ))}
       </div>
     );
   };
-  return (
-    <div className="relative xl:px-2 xl:py-2 px-2 py-1 flex items-center justify-between border rounded dark:bg-zinc-800">
-      <div
-        ref={ref}
-        data-dropzone="workspace"
-        className="flex w-full flex-wrap gap-2 xl:min-h-[108px] min-h-[90px]"
-      >
-        {visibleItems.map((item, idx) => renderItem(item, idx))}
 
+  return (
+    <div className="relative flex items-center gap-2 border rounded dark:bg-zinc-800 p-2">
+      {/* Left Scroll Button */}
+      <button
+        onClick={scrollLeft}
+        className="px-2 py-1 bg-gray-200 dark:bg-zinc-700 rounded hover:bg-gray-300 dark:hover:bg-zinc-600 z-20"
+      >
+        <ChevronLeftIcon className="w-8 h-8" />
+      </button>
+
+      {/* Scrollable Workspace */}
+      <div
+        ref={scrollContainerRef}
+        data-dropzone="workspace"
+        className="flex w-full flex-nowrap gap-2 xl:min-h-[108px] min-h-[90px] overflow-x-auto scrollbar-hide relative"
+      >
+        {/* Guide items go first so they align */}
         {renderGuideItem()}
 
+        {/* Actual items */}
+        {visibleItems.map((item, idx) => renderItem(item, idx))}
         {insertionIndex === visibleItems.length && draggingItem && (
           <div className="flex items-center gap-1">
             <Insertion type="workspace" />
@@ -214,6 +237,15 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
         )}
       </div>
 
+      {/* Right Scroll Button */}
+      <button
+        onClick={scrollRight}
+        className="px-2 py-1 bg-gray-200 dark:bg-zinc-700 rounded hover:bg-gray-300 dark:hover:bg-zinc-600 z-20"
+      >
+        <ChevronRightIcon className="w-8 h-8" />
+      </button>
+
+      {/* Controls */}
       <CommandControls
         isRunning={isRunning}
         onRun={runSequence}
@@ -222,4 +254,4 @@ export const WorkspacePanel = forwardRef<HTMLDivElement>((_, ref) => {
       />
     </div>
   );
-});
+};

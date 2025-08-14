@@ -32,3 +32,5 @@ export const DIRECTION_DELTAS: Record<string, [number, number]> = {
   up: [0, -1],
   down: [0, 1],
 };
+
+export const MAX_STEPS = 30;

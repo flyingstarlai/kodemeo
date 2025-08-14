@@ -2282,7 +2282,7 @@
                 {
                  "name":"guides",
                  "type":"string",
-                 "value":"left, blank, blank, blank, blank, left, left, left, blank, blank, blank, blank, left"
+                 "value":""
                 }, 
                 {
                  "name":"level",
@@ -2423,7 +2423,7 @@
                 {
                  "name":"guides",
                  "type":"string",
-                 "value":"left, blank, blank, blank, blank, down, blank, left, blank, blank, up, blank"
+                 "value":""
                 }, 
                 {
                  "name":"level",
@@ -2564,7 +2564,7 @@
                 {
                  "name":"guides",
                  "type":"string",
-                 "value":"blank, blank, left, blank, blank, blank, up, blank, blank, blank, blank, blank, right, right, blank, blank"
+                 "value":""
                 }, 
                 {
                  "name":"level",
@@ -2705,7 +2705,7 @@
                 {
                  "name":"guides",
                  "type":"string",
-                 "value":"blank, blank, up, blank, blank, blank, down, blank, blank, blank, blank, blank, blank, blank, blank, up, left"
+                 "value":""
                 }, 
                 {
                  "name":"level",
@@ -2846,7 +2846,7 @@
                 {
                  "name":"guides",
                  "type":"string",
-                 "value":"blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, right, up"
+                 "value":""
                 }, 
                 {
                  "name":"level",
@@ -2987,7 +2987,7 @@
                 {
                  "name":"guides",
                  "type":"string",
-                 "value":"up, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, left"
+                 "value":""
                 }, 
                 {
                  "name":"level",
@@ -3269,7 +3269,7 @@
                 {
                  "name":"guides",
                  "type":"string",
-                 "value":"blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank, blank"
+                 "value":""
                 }, 
                 {
                  "name":"level",
